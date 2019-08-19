@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import config from './config';
+import {handleErrors, showError} from './helpers';
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -65,6 +66,7 @@ export default function SignIn() {
                         body: JSON.stringify({'code': code, 'password': e.target.password.value, 'passwordConfirmation': e.target.confirmpassword.value})
                     }
                     fetch(config.resetpasswordurlsubmit, fbody)
+                    .then(handleErrors)
                         .then(response => response.json())
                         .then(data => {
                             if (data.jwt && data.user) {
@@ -74,6 +76,7 @@ export default function SignIn() {
                                 alert("Password changed succesfully")
                             }
                         })
+                        .catch( err => showError(err))
                 }}>
 
                     <TextField

@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import config from './config';
+import {handleErrors, showError} from './helpers';
 
 
 
@@ -63,6 +64,7 @@ export default function SignIn() {
             })
           }
           fetch(config.authurl, fbody)
+          .then(handleErrors)
           .then(response => response.json())
           .then(data =>  {
             if (data.jwt && data.user ) {
@@ -71,7 +73,7 @@ export default function SignIn() {
             window.location.href = "/";
             }
           })
-
+          .catch( err => showError(err))
 
           } }>
 

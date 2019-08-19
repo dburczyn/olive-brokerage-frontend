@@ -10,53 +10,51 @@ import Typography from '@material-ui/core/Typography';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 const useStyles = makeStyles({
-  card: {
-    maxWidth: 345,
-    minWidth: 300
-  },
-  media: {
-    height: 100,
-  },
+    card: {
+        maxWidth: 345,
+        minWidth: 300
+    },
+    media: {
+        height: 100,
+    },
 });
-export default function  Job (props)
+export default function Job (props)
 {
     const classes = useStyles();
-    const route = "/grid/" + props.id;
+    const route = "/grid/" + encodeURIComponent(props.url) + props.ep + "/" + props.id;
     return (
         <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route} >
-
-
-        <Card className={classes.card}>
-            <CardActionArea>
-                <CardMedia
-                    className={classes.media}
-                    image={props.img}
-                    title="Contemplative Reptile"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {props.name}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    {props.datetype}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-                    {props.created}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-                    {props.updated}
-            </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">
-                    Share
+            <Card className={classes.card}>
+                <CardActionArea>
+                    <CardMedia
+                        className={classes.media}
+                        image={props.img}
+                        title="Contemplative Reptile"
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {props.name}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {props.datetype}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {props.created}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {props.updated}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+                <CardActions>
+                    <Button size="small" color="primary">
+                        Share
           </Button>
-                <Button size="small" color="primary">
-                    Learn More
+                    <Button size="small" color="primary">
+                        Learn More
           </Button>
-            </CardActions>
-        </Card>
+                </CardActions>
+            </Card>
         </Link>
     );
 }

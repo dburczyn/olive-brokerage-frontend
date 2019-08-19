@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {Link as RouterLink} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import config from './config';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Work from '@material-ui/icons/Work';
@@ -14,7 +14,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Fab from '@material-ui/core/Fab';
 import Reply from '@material-ui/icons/Reply';
 import Button from '@material-ui/core/Button';
-
+import { handleErrors, showError } from './helpers';
 const useStyles = makeStyles(theme => ({
     '@global': {
         body: {
@@ -48,11 +48,9 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(1)
     }
 }));
-
-const Jobinner = (props) => {
-
+const Jobinner = (props) =>
+{
     const classes = useStyles();
-
     return (
         <Container component="main" maxWidth="lg">
             <div className={classes.paper}>
@@ -60,12 +58,12 @@ const Jobinner = (props) => {
                     <CardMedia
                         className={classes.media}
                         image={config.serverurl + (typeof props.data.picture !== 'undefined'
-                        ? props.data.picture.url
-                        : '')}
-                        title="Job Pic"/>
+                            ? props.data.picture.url
+                            : '')}
+                        title="Job Pic" />
                 </CardActionArea>
                 <Avatar className={classes.avatar}>
-                    <Work/>
+                    <Work />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     {props.data.name}
@@ -73,67 +71,62 @@ const Jobinner = (props) => {
                 <Typography component={'span'} variant={'body2'}>
                     <div
                         dangerouslySetInnerHTML={{
-                        __html: props.data.description
-                    }}></div>
+                            __html: props.data.description
+                        }}></div>
                 </Typography>
-
                 <Fab variant="extended" aria-label="delete" className={classes.fab}>
-                    <Mail className={classes.extendedIcon}/>
+                    <Mail className={classes.extendedIcon} />
                     <a
                         style={{
-                        color: 'black',
-                        'textDecoration': 'none'
-                    }}
+                            color: 'black',
+                            'textDecoration': 'none'
+                        }}
                         href={"mailto:" + props.data.email}>Apply</a>
                 </Fab>
-
             </div>
             <Box mt={5}>
-
                 <Link component={RouterLink} underline="none" to='/grid'>
-
                     <Button variant="contained" size="small" className={classes.button}>
-                        <Reply className={classes.extendedIcon}/>
+                        <Reply className={classes.extendedIcon} />
                         Back
                     </Button>
-
                 </Link>
             </Box>
         </Container>
     );
-
 }
-
 export default class JobExt extends Component
 {
-
-    constructor(props) {
+    constructor(props)
+    {
         super(props);
         this.state = {
             hits: [],
-            url: props.match.params.number
+            url: decodeURIComponent(props.match.params.url),
+            ep: props.match.params.ep,
+            id: props.match.params.id
         };
     }
-
-    componentDidMount() {
+    componentDidMount ()
+    {
         let fbody = {};
-        if (localStorage.getItem('token') != null && localStorage.getItem('token') !== "null") {
+        if (localStorage.getItem('token') != null && localStorage.getItem('token') !== "null")
+        {
             fbody.headers = {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             };
         }
-        fetch(config.serverurl + "/jobs/" + this.state.url, fbody)
+        fetch(this.state.url + "/" + this.state.ep + "/" + this.state.id, fbody)
+            .then(handleErrors)
             .then(response => response.json())
-            .then(data => this.setState({hits: data}));
+            .then(data => this.setState({ hits: data }))
+            .catch(err => showError(err))
     }
-
-    render() {
-
-        const {hits} = this.state;
+    render ()
+    {
+        const { hits } = this.state;
         return (
-
-            <div><Jobinner data={hits}/></div>
-
+            <div><Jobinner data={hits} /></div>
         )
     }
 }

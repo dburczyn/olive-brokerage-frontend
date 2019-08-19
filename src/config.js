@@ -1,10 +1,14 @@
+const backendurls = ['http://localhost:1337', 'http://localhost:1337'];
+const frontendurl = 'http://localhost:3000';
+const jobseps = ['/jobs', '/secretjobs'];
 const config = {
-    serverurl: 'http://localhost:1337',
-    authurl: 'http://localhost:1337/auth/local',
-    signupurl: 'http://localhost:1337/auth/local/register',
-    resetpasswordurl: 'http://localhost:1337/auth/forgot-password',
-    changeredirecturl: 'http://localhost:3000/changepassword',
-    resetpasswordurlsubmit: 'http://localhost:1337/auth/reset-password'
+    serverurl: backendurls[0],
+    authurl: backendurls[0] + '/auth/local',
+    signupurl: backendurls[0] + '/auth/local/register',
+    resetpasswordurl: backendurls[0] + '/auth/forgot-password',
+    changeredirecturl: frontendurl + '/changepassword',
+    resetpasswordurlsubmit: backendurls[0] + 'auth/reset-password',
+    multirepos: backendurls,
+    jobseps: jobseps
 };
-
 export default config;

@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import config from './config';
+import {handleErrors, showError} from './helpers';
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -62,10 +63,13 @@ export default function SignIn() {
                         },
                         body: JSON.stringify({'email': e.target.email.value, 'url': config.changeredirecturl})
                     }
-                    fetch(config.resetpasswordurl, fbody).then(() => {
+                    fetch(config.resetpasswordurl, fbody)
+                    .then(handleErrors)
+                    .then(() => {
                         window.location.href = "/";
                         alert("Password reset link sent to email")
                     })
+                    .catch( err => showError(err))
                 }}>
 
                     <TextField
