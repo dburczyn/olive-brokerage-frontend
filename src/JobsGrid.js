@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
         padding: 200
     }
 }));
-export default class JobsGrid extends Component
+export default class GenericGrid extends Component
 {
     constructor(props)
     {

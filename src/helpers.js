@@ -10,24 +10,24 @@
              let msg = err.url + ": ";
              return (
                  err.json().then(errorMessage => {
-                     alert(msg + errorMessage.message);
+                     console.log(msg + errorMessage.message);
                  })
              );
          } catch (error) {
              return (
-                 alert(error + ": \n" + err)
+                 console.log(error + ": \n" + err)
              );
          }
      } else {
          try {
              return (
                  err.json().then(errorMessage => {
-                     alert(errorMessage.message);
+                     console.log(errorMessage.message);
                  })
              );
          } catch (error) {
              return (
-                 alert(error + ": \n" + err)
+                 console.log(error + ": \n" + err)
              );
          }
      }

@@ -19,7 +19,7 @@ const useStyles = makeStyles({
         height: 100,
     },
 });
-export default function Job (props)
+export default function Project (props)
 {
     const classes = useStyles();
     const route = "/grid/" + encodeURIComponent(props.item.url) +"/"+ props.item.ep+"s/" + props.item.id;

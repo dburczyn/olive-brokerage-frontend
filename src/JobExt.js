@@ -15,6 +15,20 @@ import Fab from '@material-ui/core/Fab';
 import Reply from '@material-ui/icons/Reply';
 import Button from '@material-ui/core/Button';
 import { handleErrors, showError } from './helpers';
+
+var showdown  = require('showdown');
+showdown.setOption('strikethrough', 'true');
+showdown.setOption('simpleLineBreaks', 'true');
+showdown.setOption('simplifiedAutoLink', 'true');
+showdown.setOption('parseImgDimensions', 'true');
+showdown.setOption('tables', 'true');
+showdown.setOption('tasklists', 'true');
+showdown.setOption('ghCodeBlocks', 'true');
+    var converter = new showdown.Converter();
+
+
+
+
 const useStyles = makeStyles(theme => ({
     '@global': {
         body: {
@@ -71,7 +85,7 @@ const Jobinner = (props) =>
                 <Typography component={'span'} variant={'body2'}>
                     <div
                         dangerouslySetInnerHTML={{
-                            __html: props.data.description
+                            __html: converter.makeHtml(props.data.description )
                         }}></div>
                 </Typography>
                 <Fab variant="extended" aria-label="delete" className={classes.fab}>
@@ -116,7 +130,7 @@ export default class JobExt extends Component
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             };
         }
-        fetch(this.state.url + "/" + this.state.ep + "/" + this.state.id, fbody)
+        fetch(this.state.url + this.state.ep + "/" + this.state.id, fbody)
             .then(handleErrors)
             .then(response => response.json())
             .then(data => this.setState({ hits: data }))
