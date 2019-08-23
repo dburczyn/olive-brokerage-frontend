@@ -12,7 +12,23 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import { handleErrors, showError } from './helpers';
 import config from './config';
-
+import PropTypes from 'prop-types';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Slide from '@material-ui/core/Slide';
+function HideOnScroll (props)
+{
+  const { children, window } = props;
+  const trigger = useScrollTrigger({ target: window ? window() : undefined });
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+HideOnScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+  window: PropTypes.func,
+};
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -26,17 +42,9 @@ const useStyles = makeStyles(theme => ({
   link: {
     padding: 10,
   },
-  appBar: {
-    zIndex: 1201,
-  },
 }));
-
-
-
 const MenuAppBarInner = (props) =>
 {
-
-
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -54,105 +62,82 @@ const MenuAppBarInner = (props) =>
   {
     setAnchorEl(null);
   }
-
-
-
-
-
-
   return (
     <div className={classes.root}>
-      {/* <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup> */}
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          {
-            (props.htmlpages.length > 0) ? (
-              props.htmlpages.map(hit => <Fragment key={hit.created_at}>
-                {(hit.id > 0) ?
-                  (<Link color="inherit" className={classes.link} component={RouterLink} to={"/html/" + hit.id}>
-                    {hit.name}
-                  </Link>) : null
-                }
-              </Fragment>)
-
-            ) : null
-          }
-
-{
-            (props.grids.length > 0) ? (
-
-              props.grids.map(hit =><Fragment key={hit.created_at}>
-                {
-
-                  (hit.id > 0) ?
-                  (<Link color="inherit" className={classes.link} component={RouterLink} to={{pathname: "/grid/" + hit.urlname, state: { grid: hit} }}
-                  >
-
-                    {hit.name}
-                  </Link>) : null
-                }
-              </Fragment>)
-
-            ) : null
-          }
-
-
-
-
-          <Typography variant="h6" className={classes.title}>
-          </Typography>
-
-          {(localStorage.getItem('token') == null || localStorage.getItem('token') === "null") && (
-            <Link color="inherit" className={classes.link} component={RouterLink} to="/signin">
-              Sign In
-        </Link>
-          )}
-
-          {localStorage.getItem('token') != null && localStorage.getItem('token') !== "null" && (
-            <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem >{localStorage.getItem('user')}</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </Menu>
-            </div>
-          )}
-        </Toolbar>
-      </AppBar>
+      <HideOnScroll {...props}>
+        <AppBar>
+          <Toolbar>
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+              <MenuIcon />
+            </IconButton>
+            {
+              (props.htmlpages.length > 0) ? (
+                props.htmlpages.map(hit => <Fragment key={hit.created_at}>
+                  {(hit.id > 0 && hit.visible === 1) ?
+                    (<Link color="inherit" className={classes.link} component={RouterLink} to={"/html/" + hit.id}>
+                      <Typography>   {hit.name} </Typography>
+                    </Link>) : null
+                  }
+                </Fragment>)
+              ) : null
+            }
+            {
+              (props.grids.length > 0) ? (
+                props.grids.map(hit => <Fragment key={hit.created_at}>
+                  {
+                    (hit.id > 0 && hit.visible === 1) ?
+                      (<Link color="inherit" className={classes.link} component={RouterLink} to={{ pathname: "/grid/" + hit.urlname, state: { grid: hit } }}
+                      >
+                        <Typography>      {hit.name} </Typography>
+                      </Link>) : null
+                  }
+                </Fragment>)
+              ) : null
+            }
+            <Typography variant="h6" className={classes.title}>
+            </Typography>
+            {(localStorage.getItem('token') == null || localStorage.getItem('token') === "null") && (
+              <Link color="inherit" className={classes.link} component={RouterLink} to="/signin">
+                <Typography>     Sign In </Typography>
+              </Link>
+            )}
+            {localStorage.getItem('token') != null && localStorage.getItem('token') !== "null" && (
+              <div>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <MenuItem >{localStorage.getItem('user')}</MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
+              </div>
+            )}
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
     </div>
   );
 }
-
 export default class MenuAppBar extends Component
 {
   constructor(props)
@@ -160,7 +145,7 @@ export default class MenuAppBar extends Component
     super(props);
     this.state = {
       htmlpages: [],
-      grids:[]
+      grids: []
     };
   }
   componentDidMount ()
@@ -177,8 +162,7 @@ export default class MenuAppBar extends Component
       .then(response => response.json())
       .then(htmlpages => this.setState({ htmlpages: htmlpages }))
       .catch(err => showError(err))
-
-      fetch(config.serverurl + "/grids", fbody)
+    fetch(config.serverurl + "/grids", fbody)
       .then(handleErrors)
       .then(response => response.json())
       .then(grids => this.setState({ grids: grids }))
@@ -186,13 +170,12 @@ export default class MenuAppBar extends Component
   }
   render ()
   {
-    const { htmlpages,grids } = this.state;
+    const { htmlpages, grids } = this.state;
     return (
       <div><MenuAppBarInner
-      htmlpages={htmlpages}
-      grids={grids}
-
-       /></div>
+        htmlpages={htmlpages}
+        grids={grids}
+      /></div>
     )
   }
 }

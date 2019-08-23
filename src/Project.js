@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 export default function Project (props)
 {
     const classes = useStyles();
-    const route = "/grid/" + encodeURIComponent(props.item.url) +"/"+ props.item.ep+"s/" + props.item.id;
+    const route = "/grid/" + encodeURIComponent(props.item.url) + "/" + props.item.ep + "s/" + props.item.id;
     return (
         <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route} >
             <Card className={classes.card}>
