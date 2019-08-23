@@ -13,7 +13,7 @@ import MenuList from '@material-ui/core/MenuList';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Back from './Back';
-import MenuItemExt from './MenuItemExt';
+import Opakowywarka from './Opakowywarka';
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
@@ -130,33 +130,12 @@ export default function ProjectExt (props)
             </Paper>
           </Grid>
           <Grid item xs={9}>
-            {
-              (typeof props.data.description !== 'undefined' && typeof props.menuitem === 'undefined') ? (
-                <Fragment key={Math.random()}>
-                  <Typography>{props.data.description}</Typography>
-                </Fragment>)
-                : null
-            }
-            {
-              (typeof props.data.textmenus !== 'undefined' && props.data.textmenus.length > 0) ? (
-                props.data.textmenus.map(hit => <Fragment key={hit.created_at}>
-                  {(hit.id > 0 && hit.visible === 1 && ("" + hit.id) === props.idmenu && props.menuitem === 'textmenu') ?
-                    (
-                      <MenuItemExt type='textmenu' pops={hit} />) : null
-                  }
-                </Fragment>)
-              ) : null
-            }
-            {
-              (typeof props.data.filemenus !== 'undefined' && props.data.filemenus.length > 0) ? (
-                props.data.filemenus.map(hit => <Fragment key={hit.created_at}>
-                  {(hit.id > 0 && hit.visible === 1 && ("" + hit.id) === props.idmenu && props.menuitem === 'filemenu') ?
-                    (
-                      <MenuItemExt type='filemenu' srvurl={props.url} pops={hit} />) : null
-                  }
-                </Fragment>)
-              ) : null
-            }
+
+
+          <Opakowywarka key={Math.random()}  test={props}/>
+
+
+
           </Grid>
         </Grid>
       </div>

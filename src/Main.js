@@ -14,7 +14,7 @@ const Main = () => (
       <Route exact path='/' component={HtmlExt} />
       <Route path='/html' component={HtmlExt} />
       <Route exact path='/grid/:url/:ep/:id' render={(props) => <GenericExt {...props} />} />
-      <Route exact path='/grid/:url/:ep/:id/:menuitem/:idmenu' render={(props) => <GenericExt {...props} key={Math.random()} />} />
+      <Route exact path='/grid/:url/:ep/:id/:menuitem/:idmenu' render={(props) => <GenericExt {...props}  />} />
       <Route exact path='/grid/:urlname' render={(props) => <GenericGrid  {...props} key={Math.random()} />} />
       <Route path='/signin' component={SignIn} />
       <Route path='/signup' component={SignUp} />
