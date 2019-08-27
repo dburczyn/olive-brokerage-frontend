@@ -22,15 +22,15 @@ const useStyles = makeStyles({
 export default function Project (props)
 {
     const classes = useStyles();
-    const route = "/grid/" + encodeURIComponent(props.item.url) + "/" + props.item.ep + "s/" + props.item.id;
+    const route = "/"+props.type+"/" + encodeURIComponent(props.item.url) + "/" + props.item.ep + "s/" + props.item.id;
     return (
-        <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route} >
+        <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route}  >
             <Card className={classes.card}>
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
                         image={config.serverurl + (typeof props.item.picture !== 'undefined' ? props.item.picture.url : "")}
-                        title="test"
+                        title="Project Tile"
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
@@ -49,11 +49,8 @@ export default function Project (props)
                 </CardActionArea>
                 <CardActions>
                     <Button size="small" color="primary">
-                        Share
-          </Button>
-                    <Button size="small" color="primary">
-                        Learn More
-          </Button>
+                        Details
+                    </Button>
                 </CardActions>
             </Card>
         </Link>

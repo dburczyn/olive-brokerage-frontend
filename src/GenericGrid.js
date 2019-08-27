@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Project from './Project';
+import Project from './Project';  // import here all future components
 import { handleErrors, showError } from './helpers';
 const useStyles = makeStyles(theme => ({
     root: {
@@ -12,15 +12,16 @@ const useStyles = makeStyles(theme => ({
 export default class GenericGrid extends Component
 {
     components = {
-        Project: Project
+        Project: Project    /// insert here all future components (remember to add options for type in projeect)
     };
     constructor(props)
     {
         super(props);
         this.state = {
-            Tag: this.components[(typeof props.location.state !== 'undefined' ? props.location.state.grid.type : 'Project')],
-            hits: [],
-            grid: props.location.state
+            Tag: this.components[(typeof props.grids.grids[props.match.params.id-1] !== 'undefined' && typeof props.grids.grids[props.match.params.id-1].type !== 'undefined')? props.grids.grids[props.match.params.id-1].type : 'Project'],
+            tiles: [],
+            grids: props.grids,
+            id:props.match.params.id,
         };
     }
     componentDidMount ()
@@ -32,13 +33,13 @@ export default class GenericGrid extends Component
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             };
         }
-        if (typeof this.state.grid !== 'undefined')
+        if (typeof this.state.grids.grids[this.state.id-1] !== 'undefined' && typeof this.state.grids.grids[this.state.id-1].gridurls !== 'undefined' && this.state.grids.grids[this.state.id-1].gridurls.length>0 )
         {
-            this.state.grid.grid.gridurls.forEach(url =>
+            this.state.grids.grids[this.state.id-1].gridurls.forEach(url =>
             {
                 if (url.enable === 1)
                 {
-                    fetch(url.url + this.state.grid.grid.type + "s", fbody)
+                    fetch(url.url + this.state.grids.grids[this.state.id-1].type + "s", fbody)
                         .then(handleErrors)
                         .then(response => response.json())
                         .then(data =>
@@ -46,11 +47,11 @@ export default class GenericGrid extends Component
                             data.forEach(element =>
                             {
                                 element.url = url.url;
-                                element.ep = this.state.grid.grid.type;
+                                element.ep = this.state.grids.grids[this.state.id-1].type;
                             })
                             this.setState(
                                 prevState => ({
-                                    hits: prevState.hits.concat(data)
+                                    tiles: prevState.tiles.concat(data)
                                 }
                                 )
                             );
@@ -64,17 +65,18 @@ export default class GenericGrid extends Component
     }
     render ()
     {
-        const { hits, Tag } = this.state;
-        if (hits.length > 0)
+        const { tiles, Tag } = this.state;
+
+        if (tiles.length > 0)
         {
             return <div className={useStyles.root} style={{
                 padding: 100
             }}>
                 <Grid container spacing={5}>
-                    {hits.map(hit => <Fragment key={hit.created_at}>
-                        {(hit.id > 0 && hit.visible === 1) ?
+                    {tiles.map(tile => <Fragment key={tile.created_at}>
+                        {(tile.id > 0 && tile.visible === 1) ?
                             (<Grid item xs>
-                                <Tag item={hit} />
+                                <Tag item={tile} type={"grid"} />
                             </Grid>) : null
                         }
                     </Fragment>)}

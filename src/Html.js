@@ -28,7 +28,7 @@ export default class Html extends Component
     {
         super(props);
         this.state = {
-            hits: [],
+            data: [],
             id: (typeof props.match.params.id === 'undefined' ? 1 : props.match.params.id)
         };
     }
@@ -41,17 +41,17 @@ export default class Html extends Component
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             };
         }
-        fetch(config.serverurl + "/htmlpages/" + this.state.id, fbody)
+        fetch(config.htmlurl +"/"+ this.state.id, fbody)
             .then(handleErrors)
             .then(response => response.json())
-            .then(data => this.setState({ hits: data }))
+            .then(data => this.setState({ data: data }))
             .catch(err => showError(err))
     }
     render ()
     {
-        const { hits } = this.state;
+        const { data } = this.state;
         return (
-            <div><HtmlInner data={hits} /></div>
+            <div><HtmlInner data={data} /></div>
         )
     }
 }

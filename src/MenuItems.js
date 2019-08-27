@@ -7,34 +7,33 @@ export default function MenuItems (props)
 {
 
 
-
-  if(typeof props.projectin.test.data!=='undefined'){
+  if(typeof props.projectwithmenus.projectwithmenus!=='undefined'){
     return(
   <div key={Math.random()}>
      {
 
-              (typeof props.projectin.test.data.description !== 'undefined' && typeof props.match.params.menuitem === 'undefined') ? (
+              (typeof props.projectwithmenus.projectwithmenus.data !== 'undefined' && typeof props.match.params.menuitem === 'undefined') ? (
                 <Fragment key={Math.random()}>
-                  <Typography>{props.projectin.test.data.description}</Typography>
+                  <Typography>{props.projectwithmenus.projectwithmenus.data.description}</Typography>
                 </Fragment>)
                 : null
             }
             {
-              (typeof props.projectin.test.data.textmenus !== 'undefined' && props.projectin.test.data.textmenus.length > 0 && props.match.params.menuitem === 'textmenu') ? (
-                props.projectin.test.data.textmenus.map(hit => <Fragment key={hit.created_at}>
+              (typeof props.projectwithmenus.projectwithmenus.data.textmenus !== 'undefined' && props.projectwithmenus.projectwithmenus.data.textmenus.length > 0 && props.match.params.menuitem  === 'textmenu') ? (
+                props.projectwithmenus.projectwithmenus.data.textmenus.map(hit => <Fragment key={hit.created_at}>
                   {(hit.visible === 1 && ("" + hit.id) === props.match.params.idmenu) ?
                     (
-                      <MenuItemExt type='textmenu' pops={hit} /> ) : null
+                      <MenuItemExt type='textmenu' item={hit} /> ) : null
                   }
                 </Fragment>)
               ) : null
             }
             {
-              (typeof props.projectin.test.data.filemenus !== 'undefined' && props.projectin.test.data.filemenus.length > 0 && props.match.params.menuitem === 'filemenu') ? (
-                props.projectin.test.data.filemenus.map(hit => <Fragment key={hit.created_at}>
+              (typeof props.projectwithmenus.projectwithmenus.data.filemenus !== 'undefined' && props.projectwithmenus.projectwithmenus.data.filemenus.length > 0 && props.match.params.menuitem === 'filemenu') ? (
+                props.projectwithmenus.projectwithmenus.data.filemenus.map(hit => <Fragment key={hit.created_at}>
                   {(hit.visible === 1 && ("" + hit.id) === props.match.params.idmenu) ?
                     (
-                      <MenuItemExt type='filemenu' srvurl={props.projectin.test.url} pops={hit} />) : null
+                      <MenuItemExt type='filemenu' srvurl={props.projectwithmenus.projectwithmenus.url} item={hit} />) : null
                   }
                 </Fragment>)
               ) : null

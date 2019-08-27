@@ -15,7 +15,7 @@ export default function TextMenuExt (props)
         <Typography component={'span'} variant={'body2'}>
             <div
                 dangerouslySetInnerHTML={{
-                    __html: converter.makeHtml(props.data.pops.content)
+                    __html: converter.makeHtml(props.data.item.content)
                 }}></div>
         </Typography>
     );

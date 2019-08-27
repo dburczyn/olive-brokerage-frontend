@@ -1,14 +1,15 @@
-const backendurls = ['http://localhost:1337'];
+const backendurl = 'http://localhost:1337';
 const frontendurl = 'http://localhost:3000';
-const jobseps = ['/projects'];
 const config = {
-    serverurl: backendurls[0],
-    authurl: backendurls[0] + '/auth/local',
-    signupurl: backendurls[0] + '/auth/local/register',
-    resetpasswordurl: backendurls[0] + '/auth/forgot-password',
+    serverurl: backendurl,
+    htmlurl: backendurl + '/htmlpages',
+    gridurl: backendurl + '/grids',
+    authurl: backendurl + '/auth/local',
+    signupurl: backendurl + '/auth/local/register',
+    resetpasswordurl: backendurl + '/auth/forgot-password',
     changeredirecturl: frontendurl + '/changepassword',
-    resetpasswordurlsubmit: backendurls[0] + '/auth/reset-password',
-    multirepos: backendurls,
-    jobseps: jobseps
+    resetpasswordurlsubmit: backendurl + '/auth/reset-password',
+    footerimg: "https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    footertext: "This is example footer content"
 };
 export default config;

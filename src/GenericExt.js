@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { handleErrors, showError } from './helpers';
-import ProjectExt from './ProjectExt';
+import ProjectExt from './ProjectExt';  // import here new components if needed
 export default class GenericExt extends Component
 {
     constructor(props)
@@ -18,7 +18,7 @@ export default class GenericExt extends Component
         };
     }
     components = {
-        Projects: ProjectExt
+        Projects: ProjectExt    // add here new components if needed
     };
     componentDidMount ()
     {

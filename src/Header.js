@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -51,6 +50,7 @@ const MenuAppBarInner = (props) =>
   function handleLogout (event)
   {
     localStorage.setItem('token', null);
+    localStorage.setItem('user', null);
     setAnchorEl(null);
     window.location.href = "/";
   }
@@ -67,15 +67,12 @@ const MenuAppBarInner = (props) =>
       <HideOnScroll {...props}>
         <AppBar>
           <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-              <MenuIcon />
-            </IconButton>
             {
               (props.htmlpages.length > 0) ? (
-                props.htmlpages.map(hit => <Fragment key={hit.created_at}>
-                  {(hit.id > 0 && hit.visible === 1) ?
-                    (<Link color="inherit" className={classes.link} component={RouterLink} to={"/html/" + hit.id}>
-                      <Typography>   {hit.name} </Typography>
+                props.htmlpages.map(htmlpage => <Fragment key={htmlpage.created_at}>
+                  {( htmlpage.visible === 1) ?
+                    (<Link color="inherit" className={classes.link} component={RouterLink} to={"/html/" + htmlpage.id}>
+                      <Typography>   {htmlpage.name} </Typography>
                     </Link>) : null
                   }
                 </Fragment>)
@@ -83,12 +80,12 @@ const MenuAppBarInner = (props) =>
             }
             {
               (props.grids.length > 0) ? (
-                props.grids.map(hit => <Fragment key={hit.created_at}>
+                props.grids.map(grid => <Fragment key={grid.created_at}>
                   {
-                    (hit.id > 0 && hit.visible === 1) ?
-                      (<Link color="inherit" className={classes.link} component={RouterLink} to={{ pathname: "/grid/" + hit.urlname, state: { grid: hit } }}
+                    (grid.visible === 1) ?
+                      (<Link color="inherit" className={classes.link} component={RouterLink} to={{ pathname: "/grid/" + grid.id}}
                       >
-                        <Typography>      {hit.name} </Typography>
+                        <Typography>{grid.name} </Typography>
                       </Link>) : null
                   }
                 </Fragment>)
@@ -98,7 +95,7 @@ const MenuAppBarInner = (props) =>
             </Typography>
             {(localStorage.getItem('token') == null || localStorage.getItem('token') === "null") && (
               <Link color="inherit" className={classes.link} component={RouterLink} to="/signin">
-                <Typography>     Sign In </Typography>
+                <Typography>Sign In </Typography>
               </Link>
             )}
             {localStorage.getItem('token') != null && localStorage.getItem('token') !== "null" && (
@@ -145,7 +142,8 @@ export default class MenuAppBar extends Component
     super(props);
     this.state = {
       htmlpages: [],
-      grids: []
+      grids: [],
+      handler:props.handler
     };
   }
   componentDidMount ()
@@ -157,16 +155,19 @@ export default class MenuAppBar extends Component
         'Authorization': 'Bearer ' + localStorage.getItem('token')
       };
     }
-    fetch(config.serverurl + "/htmlpages", fbody)
+    fetch(config.htmlurl, fbody)
       .then(handleErrors)
       .then(response => response.json())
       .then(htmlpages => this.setState({ htmlpages: htmlpages }))
       .catch(err => showError(err))
-    fetch(config.serverurl + "/grids", fbody)
+    fetch(config.gridurl, fbody)
       .then(handleErrors)
       .then(response => response.json())
-      .then(grids => this.setState({ grids: grids }))
+      .then(grids => {this.setState({ grids: grids})
+      this.state.handler(grids)
+    })
       .catch(err => showError(err))
+
   }
   render ()
   {

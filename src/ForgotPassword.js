@@ -6,10 +6,10 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import config from './config';
-import {handleErrors, showError} from './helpers';
+import { handleErrors, showError } from './helpers';
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -36,14 +36,15 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function SignIn() {
+export default function SignIn ()
+{
     const classes = useStyles();
 
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon/>
+                    <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Forgot Password
@@ -53,24 +54,26 @@ export default function SignIn() {
                     noValidate
                     action="/"
                     method="POST"
-                    onSubmit={(e) => {
-                    e.preventDefault();
-                    let fbody = {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({'email': e.target.email.value, 'url': config.changeredirecturl})
-                    }
-                    fetch(config.resetpasswordurl, fbody)
-                    .then(handleErrors)
-                    .then(() => {
-                        window.location.href = "/";
-                        alert("Password reset link sent to email")
-                    })
-                    .catch( err => showError(err))
-                }}>
+                    onSubmit={(e) =>
+                    {
+                        e.preventDefault();
+                        let fbody = {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ 'email': e.target.email.value, 'url': config.changeredirecturl })
+                        }
+                        fetch(config.resetpasswordurl, fbody)
+                            .then(handleErrors)
+                            .then(() =>
+                            {
+                                window.location.href = "/";
+                                alert("Password reset link sent to email")
+                            })
+                            .catch(err => showError(err))
+                    }}>
 
                     <TextField
                         variant="outlined"
@@ -81,7 +84,7 @@ export default function SignIn() {
                         label="Email Address"
                         name="email"
                         autoComplete="email"
-                        autoFocus/>
+                        autoFocus />
 
                     <Button
                         type="submit"
@@ -95,6 +98,11 @@ export default function SignIn() {
                         <Grid item>
                             <Link href="/signup" variant="body2">
                                 {"Don't have an account? Sign Up"}
+                            </Link>
+                        </Grid>
+                        <Grid item>
+                            <Link href="/signin" variant="body2">
+                                Already have an account? Sign in
                             </Link>
                         </Grid>
                     </Grid>

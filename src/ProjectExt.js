@@ -13,7 +13,7 @@ import MenuList from '@material-ui/core/MenuList';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Back from './Back';
-import Opakowywarka from './Opakowywarka';
+import MenuItemRouter from './MenuItemRouter';
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
@@ -130,12 +130,7 @@ export default function ProjectExt (props)
             </Paper>
           </Grid>
           <Grid item xs={9}>
-
-
-          <Opakowywarka key={Math.random()}  test={props}/>
-
-
-
+            <MenuItemRouter key={Math.random()} projectwithmenus={props} />
           </Grid>
         </Grid>
       </div>

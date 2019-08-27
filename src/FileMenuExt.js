@@ -15,11 +15,11 @@ export default function FileMenuExt (props)
         <Typography component={'span'} variant={'body2'}>
             <div
                 dangerouslySetInnerHTML={{
-                    __html: converter.makeHtml(props.data.pops.description)
+                    __html: converter.makeHtml(props.data.item.description)
                 }}></div>
-            {props.data.pops.files.map((file) =>
+            {props.data.item.files.map((file) =>
             {
-                return (<div key={Math.random()}> <a href={props.data.srvurl.slice(0, -1) + file.url} download>{file.name}</a><br /></div>)
+                return (<div key={Math.random()}> <a href={props.data.srvurl.slice(0, -1) + file.url}  target="_blank" rel="noopener noreferrer" download>{file.name}</a><br /></div>)
             })}
         </Typography>
     );

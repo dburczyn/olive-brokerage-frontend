@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
+import config from './config';
 function HideOnScroll (props)
 {
   const { children, window } = props;
@@ -65,12 +66,12 @@ export default function Footer (props)
           <Toolbar>
             <img
               style={{ height: 70 }}
-              src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+              src={config.footerimg}
               alt="background"
             />
             <Typography variant="h6" className={classes.title}>
             </Typography>
-            <Typography variant="h6">This is exmple footer content</Typography>
+            <Typography variant="h6">{config.footertext}</Typography>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
