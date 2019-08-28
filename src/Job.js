@@ -22,38 +22,35 @@ const useStyles = makeStyles({
 export default function Job (props)
 {
     const classes = useStyles();
-    const route = "/grid/" + encodeURIComponent(props.item.url) +"/"+ props.item.ep+"s/" + props.item.id;
+    const route = "/"+props.type+"/" + encodeURIComponent(props.item.url) + "/" + props.item.ep + "s/" + props.item.id;
     return (
-        <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route} >
+        <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route}  >
             <Card className={classes.card}>
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
                         image={config.serverurl + (typeof props.item.picture !== 'undefined' ? props.item.picture.url : "")}
-                        title="test"
+                        title="Job Tile"
                     />
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="h5" component="h2">
                             {props.item.name}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {props.item.datetype}
+                            {"Type: " + props.item.type}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {props.item.created_at}
+                            {"Created: " +props.item.created_at}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {props.item.updated_at}
+                            {"Updated: "+props.item.updated_at}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
                     <Button size="small" color="primary">
-                        Share
-          </Button>
-                    <Button size="small" color="primary">
-                        Learn More
-          </Button>
+                        Details
+                    </Button>
                 </CardActions>
             </Card>
         </Link>

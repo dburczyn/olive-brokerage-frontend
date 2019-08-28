@@ -93,38 +93,34 @@ export default function ProjectExt (props)
                   }
                 </Fragment>
                 {
-                  (typeof props.data.textmenus !== 'undefined' && props.data.textmenus.length > 0) ?
+                  (Object.keys(props.data).length > 0) ?
                     (
-                      props.data.textmenus.map(hit =>
+                      Object.keys(props.data).map(hit =>
                       {
-                        const route = "/" + props.type + "/" + encodeURIComponent(props.url) + "/" + props.ep + "/" + props.id + "/textmenu/" + hit.id;
-                        return <Fragment key={hit.created_at}>
-                          {
-                            (hit.id > 0 && hit.visible === 1) ? (<Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route}>
-                              <MenuItem> {hit.name}</MenuItem>
-                            </Link>) : null
-                          }
-                        </Fragment>;
+                        if (Array.isArray(props.data[hit]))
+                        {
+                          return (
+                            props.data[hit].map(hit2 =>
+                            {
+                              const route = "/" + props.type + "/" + encodeURIComponent(props.url) + "/" + props.ep + "/" + props.id + "/" + hit + "/" + hit2.id;
+                              return <Fragment key={hit2.created_at}>
+                                {
+                                  <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route}>
+                                    <MenuItem> {
+                                      (typeof hit2.name !== 'undefined') ? (hit2.name) : (hit2.id)
+                                    }</MenuItem>
+                                  </Link>
+                                }
+                              </Fragment>;
+                            }
+                            )
+                          )
+                        }
+                        return null
                       }
                       )
                     )
                     : null
-                }
-                {
-                  (typeof props.data.filemenus !== 'undefined' && props.data.filemenus.length > 0) ? (
-                    props.data.filemenus.map(hit =>
-                    {
-                      const route = "/" + props.type + "/" + encodeURIComponent(props.url) + "/" + props.ep + "/" + props.id + "/filemenu/" + hit.id;
-                      return <Fragment key={hit.created_at}>
-                        {
-                          (hit.id > 0 && hit.visible === 1) ? (<Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route}>
-                            <MenuItem> {hit.name}</MenuItem>
-                          </Link>) : null
-                        }
-                      </Fragment>;
-                    }
-                    )
-                  ) : null
                 }
               </MenuList>
             </Paper>

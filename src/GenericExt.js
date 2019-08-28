@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { handleErrors, showError } from './helpers';
 import ProjectExt from './ProjectExt';  // import here new components if needed
+import JobExt from './JobExt';
+import TrainingExt from './TrainingExt';
+import EventExt from './EventExt';
 export default class GenericExt extends Component
 {
     constructor(props)
@@ -11,15 +14,18 @@ export default class GenericExt extends Component
             url: decodeURIComponent(props.match.params.url),
             ep: props.match.params.ep,
             id: props.match.params.id,
-            Tag: this.components[(typeof props.match.params.ep !== 'undefined' ? props.match.params.ep : 'Projects')],
+            Tag: this.components[((typeof props.match.params.ep !== 'undefined' && typeof this.components[props.match.params.ep]!=='undefined') ? props.match.params.ep : 'Projects')],
             menuitem: props.match.params.menuitem,
             idmenu: props.match.params.idmenu,
             type: 'grid'
         };
     }
     components = {
-        Projects: ProjectExt    // add here new components if needed
-    };
+        Projects: ProjectExt,    // add here new components if needed
+        Jobs: JobExt,
+        Trainings: TrainingExt,
+        Events: EventExt,
+    }
     componentDidMount ()
     {
         let fbody = {};

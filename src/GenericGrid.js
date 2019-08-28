@@ -2,6 +2,9 @@ import React, { Fragment, Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Project from './Project';  // import here all future components
+import Job from './Job';  // import here all future components
+import Training from './Training';  // import here all future components
+import Event from './Event';  // import here all future components
 import { handleErrors, showError } from './helpers';
 const useStyles = makeStyles(theme => ({
     root: {
@@ -12,13 +15,16 @@ const useStyles = makeStyles(theme => ({
 export default class GenericGrid extends Component
 {
     components = {
-        Project: Project    /// insert here all future components (remember to add options for type in projeect)
+        Project: Project,
+        Job: Job,
+        Training: Training,
+        Event: Event
     };
     constructor(props)
     {
         super(props);
         this.state = {
-            Tag: this.components[(typeof props.grids.grids[props.match.params.id-1] !== 'undefined' && typeof props.grids.grids[props.match.params.id-1].type !== 'undefined')? props.grids.grids[props.match.params.id-1].type : 'Project'],
+            Tag: this.components[(typeof props.grids.grids[props.match.params.id-1] !== 'undefined' && typeof props.grids.grids[props.match.params.id-1].type !== 'undefined' && typeof this.components[props.grids.grids[props.match.params.id-1].type]!=='undefined' )? props.grids.grids[props.match.params.id-1].type : 'Project'],
             tiles: [],
             grids: props.grids,
             id:props.match.params.id,
@@ -66,15 +72,14 @@ export default class GenericGrid extends Component
     render ()
     {
         const { tiles, Tag } = this.state;
-
-        if (tiles.length > 0)
+           if (tiles.length > 0)
         {
             return <div className={useStyles.root} style={{
                 padding: 100
             }}>
                 <Grid container spacing={5}>
                     {tiles.map(tile => <Fragment key={tile.created_at}>
-                        {(tile.id > 0 && tile.visible === 1) ?
+                        {(tile.id > 0 && (tile.visible === 1 || typeof tile.visible ==='undefined')) ?
                             (<Grid item xs>
                                 <Tag item={tile} type={"grid"} />
                             </Grid>) : null
