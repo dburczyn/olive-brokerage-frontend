@@ -74,7 +74,7 @@ export default function EventExt (props)
                 image={config.serverurl + (typeof props.data.picture !== 'undefined'
                   ? props.data.picture.url
                   : '')}
-                title="Job Pic" />
+                title="Event Pic" />
             </CardActionArea>
           </Grid>
 
@@ -122,9 +122,7 @@ export default function EventExt (props)
                 </Fab>
           </Grid>
           </Grid>
-
-
-      </div>
+                </div>
       <Box mt={5}>
         <Back />
       </Box>

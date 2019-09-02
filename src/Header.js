@@ -31,7 +31,7 @@ HideOnScroll.propTypes = {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-  },
+    },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -40,6 +40,9 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     padding: 10,
+  },
+  appbar: {
+    overflowX: "auto",
   },
 }));
 const MenuAppBarInner = (props) =>
@@ -65,7 +68,7 @@ const MenuAppBarInner = (props) =>
   return (
     <div className={classes.root}>
       <HideOnScroll {...props}>
-        <AppBar>
+  <AppBar className={classes.appbar}>
           <Toolbar>
             {
               (props.htmlpages.length > 0) ? (

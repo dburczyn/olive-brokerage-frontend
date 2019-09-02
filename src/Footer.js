@@ -40,6 +40,7 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     top: 'auto',
     bottom: 0,
+    // overflowX: "auto",
   },
   grow: {
     flexGrow: 1,
@@ -62,7 +63,7 @@ export default function Footer (props)
   return (
     <div className={classes.root}>
       <HideOnScroll {...props}>
-        <AppBar color="primary" className={classes.appBar}>
+        <AppBar  color="primary" className={classes.appBar}>
           <Toolbar>
             <img
               style={{ height: 70 }}

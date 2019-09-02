@@ -74,7 +74,7 @@ export default function TrainingExt (props)
                 image={config.serverurl + (typeof props.data.picture !== 'undefined'
                   ? props.data.picture.url
                   : '')}
-                title="Job Pic" />
+                title="Training Pic" />
             </CardActionArea>
           </Grid>
 

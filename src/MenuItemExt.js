@@ -15,7 +15,7 @@ super(props);
     components = {
         textmenus: TextMenuExt,   // insert here all future cmponents
         filemenus: FileMenuExt,
-        generic:GenericMenuExt
+        generic: GenericMenuExt
     };
     render ()
     {

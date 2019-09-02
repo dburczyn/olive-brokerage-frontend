@@ -1,0 +1,19 @@
+css plik do:
+bg header bg footer
+font size/color footer/header
+img footer img header
+text footer 3 kolumny
+nazwa pkt menu w kazdym komponencie - weilkosc w pliku css
+
+migracja danych: cala baza jako plik wgrana do swiezej inst/stara baza do
+swiezej instajacji ze zminaa struktury
+
+widget tezt w tabeli (header/body razem z kolorem - jak olive/omilab)
+
+wyklikac przykladowy projekt home/details/download
+
+obie puste wersje web/brokerage
+
+postawic na sererze/test konta mailowego innego niz gmail
+
+created/updated sformatowane na gridzie kafelkach
