@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GenericMenuExt from './GenericMenuExt';
 import TextMenuExt from './TextMenuExt';
+import TextCardExt from './TextCardExt';
 import FileMenuExt from './FileMenuExt';  // import here all future components
 export default class MenuItemExt extends Component
 {
@@ -15,6 +16,7 @@ super(props);
     components = {
         textmenus: TextMenuExt,   // insert here all future cmponents
         filemenus: FileMenuExt,
+        textcards: TextCardExt,
         generic: GenericMenuExt
     };
     render ()

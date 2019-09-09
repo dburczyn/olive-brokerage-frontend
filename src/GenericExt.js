@@ -4,6 +4,7 @@ import ProjectExt from './ProjectExt';  // import here new components if needed
 import JobExt from './JobExt';
 import TrainingExt from './TrainingExt';
 import EventExt from './EventExt';
+
 export default class GenericExt extends Component
 {
     constructor(props)

@@ -59,10 +59,10 @@ export default function ProjectExt (props)
 {
   const classes = useStyles();
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component="main" maxWidth="xl">
       <div className={classes.root}>
         <Grid container spacing={3}>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <CardActionArea>
               <CardMedia
                 className={classes.media}
@@ -72,7 +72,7 @@ export default function ProjectExt (props)
                 title="Job Pic" />
             </CardActionArea>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={10}>
             <Typography component="h1" variant="h4">
               {props.data.name}
             </Typography>
@@ -82,7 +82,7 @@ export default function ProjectExt (props)
           </Grid>
         </Grid>
         <Grid container spacing={3}>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <Paper className={classes.paper}>
               <MenuList>
                 <Fragment key={Math.random()}>
@@ -125,7 +125,7 @@ export default function ProjectExt (props)
               </MenuList>
             </Paper>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={10}>
             <MenuItemRouter key={Math.random()} projectwithmenus={props} />
           </Grid>
         </Grid>

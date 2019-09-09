@@ -102,10 +102,10 @@ export default function EventExt (props)
           <Grid container spacing={3}>
         <Grid item xs={12}>
         <Typography component="h5" variant="h6">
-              Last update: {props.data.updated_at}
+        Last update: {new Date(props.data.updated_at).toLocaleString()}
             </Typography>
             <Typography component="h5" variant="h6">
-              Created: {props.data.created_at}
+              Created: {new Date(props.data.created_at).toLocaleString()}
             </Typography>
           </Grid>
           </Grid>

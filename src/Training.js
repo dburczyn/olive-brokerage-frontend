@@ -40,10 +40,10 @@ export default function Training (props)
                             {"Date: " + props.item.date}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {"Created: " +props.item.created_at}
+                            {"Created: " +new Date(props.item.created_at).toLocaleString()}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {"Updated: "+props.item.updated_at}
+                            {"Updated: "+new Date(props.item.updated_at).toLocaleString()}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

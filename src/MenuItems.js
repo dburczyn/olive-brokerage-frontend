@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import Typography from '@material-ui/core/Typography';
 import MenuItemExt from './MenuItemExt';
+import CssBaseline from '@material-ui/core/CssBaseline';
 export default function MenuItems (props)
 {
   if(typeof props.projectwithmenus.projectwithmenus!=='undefined'){
@@ -9,6 +10,7 @@ export default function MenuItems (props)
      {
                 (typeof props.projectwithmenus.projectwithmenus.data !== 'undefined' && typeof props.match.params.menuitem === 'undefined') ? (
                 <Fragment key={Math.random()}>
+                   <CssBaseline />
                   <Typography>{props.projectwithmenus.projectwithmenus.data.description}</Typography>
                 </Fragment>)
                 : null
@@ -41,27 +43,7 @@ export default function MenuItems (props)
                       )
                     :    null
                 }
-{/*
-            {
-              (typeof props.projectwithmenus.projectwithmenus.data.textmenus !== 'undefined' && props.projectwithmenus.projectwithmenus.data.textmenus.length > 0 && props.match.params.menuitem  === 'textmenus') ? (
-                props.projectwithmenus.projectwithmenus.data.textmenus.map(hit => <Fragment key={hit.created_at}>
-                  {(hit.visible === 1 && ("" + hit.id) === props.match.params.idmenu) ?
-                    (
-                      <MenuItemExt type='textmenus' item={hit} /> ) : null
-                  }
-                </Fragment>)
-              ) : null
-            }
-            {
-              (typeof props.projectwithmenus.projectwithmenus.data.filemenus !== 'undefined' && props.projectwithmenus.projectwithmenus.data.filemenus.length > 0 && props.match.params.menuitem === 'filemenus') ? (
-                props.projectwithmenus.projectwithmenus.data.filemenus.map(hit => <Fragment key={hit.created_at}>
-                  {(hit.visible === 1 && ("" + hit.id) === props.match.params.idmenu) ?
-                    (
-                      <MenuItemExt type='filemenus' srvurl={props.projectwithmenus.projectwithmenus.url} item={hit} />) : null
-                  }
-                </Fragment>)
-              ) : null
-            } */}
+
   </div>
 )
           }

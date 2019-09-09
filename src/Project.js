@@ -37,14 +37,9 @@ export default function Project (props)
                             {props.item.name}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {props.item.datetype}
+                            {props.item.description}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            {props.item.created_at}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            {props.item.updated_at}
-                        </Typography>
+
                     </CardContent>
                 </CardActionArea>
                 <CardActions>

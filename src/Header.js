@@ -73,7 +73,7 @@ const MenuAppBarInner = (props) =>
             {
               (props.htmlpages.length > 0) ? (
                 props.htmlpages.map(htmlpage => <Fragment key={htmlpage.created_at}>
-                  {( htmlpage.visible === 1) ?
+                  {( htmlpage.visible === true||1) ?
                     (<Link color="inherit" className={classes.link} component={RouterLink} to={"/html/" + htmlpage.id}>
                       <Typography>   {htmlpage.name} </Typography>
                     </Link>) : null
@@ -85,7 +85,7 @@ const MenuAppBarInner = (props) =>
               (props.grids.length > 0) ? (
                 props.grids.map(grid => <Fragment key={grid.created_at}>
                   {
-                    (grid.visible === 1) ?
+                    (grid.visible === true||1) ?
                       (<Link color="inherit" className={classes.link} component={RouterLink} to={{ pathname: "/grid/" + grid.id}}
                       >
                         <Typography>{grid.name} </Typography>
