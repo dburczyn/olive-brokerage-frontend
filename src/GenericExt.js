@@ -10,6 +10,7 @@ export default class GenericExt extends Component
     constructor(props)
     {
         super(props);
+        console.log(props)
         this.state = {
             hits: [],
             url: decodeURIComponent(props.match.params.url),

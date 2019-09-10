@@ -66,13 +66,27 @@ export default function Footer (props)
         <AppBar  color="primary" className={classes.appBar}>
           <Toolbar>
             <img
-              style={{ height: 70 }}
+              style={{ height: 100 }}
               src={config.footerimg}
               alt="background"
             />
             <Typography variant="h6" className={classes.title}>
             </Typography>
             <Typography variant="h6">{config.footertext}</Typography>
+            <Typography variant="h6" className={classes.title}>
+            </Typography>
+            <Typography variant="h6">{config.footertext}</Typography>
+            <Typography variant="h6" className={classes.title}>
+            </Typography>
+            <Typography variant="h6">{""}</Typography>
+
+            <img
+              style={{ height: 70 }}
+              src={config.footerimg}
+              alt="background"
+            />
+
+
           </Toolbar>
         </AppBar>
       </HideOnScroll>

@@ -102,7 +102,7 @@ export default function ProjectExt (props)
                           return (
                             props.data[hit].map(hit2 =>
                             {
-                              const route = "/" + props.type + "/" + encodeURIComponent(props.url) + "/" + props.ep + "/" + props.id + "/" + hit + "/" + hit2.id;
+                              const route = "/" + props.type + "/" + encodeURIComponent(props.url) + "/" + props.ep + "/" + props.id + "/" + hit + "/" + hit2.name;
                               return <Fragment key={hit2.created_at}>
                                 {
                                   <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route}>

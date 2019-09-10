@@ -1,12 +1,26 @@
 import React, { Fragment, Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Project from './Project';  // import here all future components
-import Job from './Job';  // import here all future components
-import Training from './Training';  // import here all future components
+import Project from './Project';
+import Job from './Job';
+import Training from './Training';
 import Event from './Event';  // import here all future components
 import { handleErrors, showError } from './helpers';
 import Typography from '@material-ui/core/Typography';
+
+function hasname (element)
+{
+    return typeof element.name !== 'undefined' && element.name === this;
+}
+
+const getname = (grid) =>
+{
+    if ( grid  && typeof grid.grids !== 'undefined' && typeof grid.grids.grids !== 'undefined')
+    {
+        let type = grid.match.params.id;
+        return grid.grids.grids.find(hasname, null, null, null, type);
+    }
+};
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,11 +40,10 @@ export default class GenericGrid extends Component
     {
         super(props);
         this.state = {
-            Tag: this.components[(typeof props.grids.grids[props.match.params.id - 1] !== 'undefined' && typeof props.grids.grids[props.match.params.id - 1].type !== 'undefined' && typeof this.components[props.grids.grids[props.match.params.id - 1].type] !== 'undefined') ? props.grids.grids[props.match.params.id - 1].type : 'Project'],
+            Tag: this.components[(typeof getname(props) !== 'undefined') ? getname(props).type : "Project"],
             tiles: [],
             grids: props.grids,
             id: props.match.params.id,
-            name: (typeof props.grids.grids[props.match.params.id - 1] !== 'undefined') ? props.grids.grids[props.match.params.id - 1].name : "Title"
         };
     }
     componentDidMount ()
@@ -42,50 +55,54 @@ export default class GenericGrid extends Component
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             };
         }
-        if (typeof this.state.grids.grids[this.state.id - 1] !== 'undefined' && typeof this.state.grids.grids[this.state.id - 1].gridurls !== 'undefined' && this.state.grids.grids[this.state.id - 1].gridurls.length > 0)
+        if (this.state.grids && this.state.grids.length>0){
+        this.state.grids.forEach(griditeminarray =>
         {
-            this.state.grids.grids[this.state.id - 1].gridurls.forEach(url =>
+            if (typeof griditeminarray !== 'undefined' && typeof griditeminarray.gridurls !== 'undefined' && griditeminarray.gridurls.length > 0 && griditeminarray.name === this.state.id)
             {
-                if (url.enable === true || 1)
+                griditeminarray.gridurls.forEach(url =>
                 {
-                    fetch(url.url + this.state.grids.grids[this.state.id - 1].type + "s", fbody)
-                        .then(handleErrors)
-                        .then(response => response.json())
-                        .then(data =>
-                        {
-                            data.forEach(element =>
+                    if (url.enable === true || 1)
+                    {
+                        fetch(url.url + griditeminarray.type + "s", fbody)
+                            .then(handleErrors)
+                            .then(response => response.json())
+                            .then(data =>
                             {
-                                element.url = url.url;
-                                element.ep = this.state.grids.grids[this.state.id - 1].type;
-                            })
-                            this.setState(
-                                prevState => ({
-                                    tiles: prevState.tiles.concat(data)
-                                }
-                                )
-                            );
-                        }
-                        )
-                        .catch(err => showError(err));
+                                data.forEach(element =>
+                                {
+                                    element.url = url.url;
+                                    element.ep = griditeminarray.type;
+                                })
+                                this.setState(
+                                    prevState => ({
+                                        tiles: prevState.tiles.concat(data)
+                                    }
+                                    )
+                                );
+                            }
+                            )
+                            .catch(err => showError(err));
+                    }
                 }
+                );
             }
-            );
-        }
+        });
+    }
     }
     render ()
     {
-        const { name,tiles, Tag } = this.state;
+        const { id, tiles, Tag } = this.state;
         if (tiles.length > 0)
         {
             return <div><Typography component={'span'} variant={'h3'}>
-                {name}
-        </Typography> <div className={useStyles.root} style={{
-                    padding: 50
-                }}>
-
+                {id}
+            </Typography> <div className={useStyles.root} style={{
+                padding: 50
+            }}>
                     <Grid container spacing={5}>
                         {tiles.map(tile => <Fragment key={tile.created_at}>
-                            {(tile.id > 0 && ((tile.visible === true || tile.visible === 1) || typeof tile.visible === 'undefined')) ?
+                            {(((tile.visible === true || tile.visible === 1) || typeof tile.visible === 'undefined')) ?
                                 (<Grid item xs>
                                     <Tag item={tile} type={"grid"} />
                                 </Grid>) : null

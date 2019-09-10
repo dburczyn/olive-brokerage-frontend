@@ -10,24 +10,33 @@ export default class App extends Component
   {
     super(props);
     this.state = {
-      grids: []
+      grids: [],
+      htmlpages: []
     };
-    this.handler = this.handler.bind(this);
+    this.handlergrids = this.handlergrids.bind(this);
+    this.handlerhtml = this.handlerhtml.bind(this);
   }
-  handler (grids)
+  handlergrids (grids)
   {
     this.setState({
-      grids: grids
+      grids: grids,
+    });
+  }
+
+  handlerhtml (htmlpages)
+  {
+    this.setState({
+      htmlpages: htmlpages
     });
   }
 
   render ()
   {
-    const { grids } = this.state;
+    const { grids,htmlpages } = this.state;
     return (
       <div>
-        <Header handler={this.handler} />
-        <Main grids={grids} />
+        <Header handlergrids={this.handlergrids}  handlerhtml={this.handlerhtml}  />
+        <Main grids={grids} htmlpages={htmlpages} />
         <Footer />
       </div>
     );

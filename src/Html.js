@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import config from './config';
 import Typography from '@material-ui/core/Typography';
-import { handleErrors, showError } from './helpers';
 var showdown = require('showdown');
 showdown.setOption('strikethrough', 'true');
 showdown.setOption('simpleLineBreaks', 'true');
@@ -28,30 +26,31 @@ export default class Html extends Component
     {
         super(props);
         this.state = {
-            data: [],
+            data: (props.htmlpages.htmlpages && props.htmlpages.htmlpages.length > 0 ? props.htmlpages.htmlpages : undefined),
             id: (typeof props.match.params.id === 'undefined' ? 1 : props.match.params.id)
         };
     }
-    componentDidMount ()
-    {
-        let fbody = {};
-        if (localStorage.getItem('token') != null && localStorage.getItem('token') !== "null")
-        {
-            fbody.headers = {
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            };
-        }
-        fetch(config.htmlurl +"/"+ this.state.id, fbody)
-            .then(handleErrors)
-            .then(response => response.json())
-            .then(data => this.setState({ data: data }))
-            .catch(err => showError(err))
-    }
     render ()
     {
-        const { data } = this.state;
-        return (
-            <div><HtmlInner data={data} /></div>
-        )
+        const { data, id } = this.state;
+        if (data && data.length > 0)
+        {
+            function hasname (element)
+            {
+                return typeof element.name !== 'undefined' && element.name === this;
+            }
+            const getname = (data) =>
+            {
+                return data.find(hasname, id, id, id, id);
+            };
+            const filtereddata = getname(data)
+            if (filtereddata && filtereddata.content){
+            return (
+                <div><HtmlInner data={filtereddata} /></div>
+            )
+            }
+            return <div>no data</div>
+        }
+        return <div>no data</div>
     }
 }

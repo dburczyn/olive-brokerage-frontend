@@ -73,8 +73,8 @@ const MenuAppBarInner = (props) =>
             {
               (props.htmlpages.length > 0) ? (
                 props.htmlpages.map(htmlpage => <Fragment key={htmlpage.created_at}>
-                  {( htmlpage.visible === true||1) ?
-                    (<Link color="inherit" className={classes.link} component={RouterLink} to={"/html/" + htmlpage.id}>
+                  {( htmlpage.visible === (true||1)) ?
+                    (<Link color="inherit" className={classes.link} component={RouterLink} to={"/html/" + htmlpage.name}>
                       <Typography>   {htmlpage.name} </Typography>
                     </Link>) : null
                   }
@@ -86,7 +86,7 @@ const MenuAppBarInner = (props) =>
                 props.grids.map(grid => <Fragment key={grid.created_at}>
                   {
                     (grid.visible === true||1) ?
-                      (<Link color="inherit" className={classes.link} component={RouterLink} to={{ pathname: "/grid/" + grid.id}}
+                      (<Link color="inherit" className={classes.link} component={RouterLink} to={{ pathname: "/grid/" + grid.name}}
                       >
                         <Typography>{grid.name} </Typography>
                       </Link>) : null
@@ -146,7 +146,8 @@ export default class MenuAppBar extends Component
     this.state = {
       htmlpages: [],
       grids: [],
-      handler:props.handler
+      handlergrids:props.handlergrids,
+      handlerhtml:props.handlerhtml
     };
   }
   componentDidMount ()
@@ -161,13 +162,15 @@ export default class MenuAppBar extends Component
     fetch(config.htmlurl, fbody)
       .then(handleErrors)
       .then(response => response.json())
-      .then(htmlpages => this.setState({ htmlpages: htmlpages }))
+      .then(htmlpages => {this.setState({ htmlpages: htmlpages})
+      this.state.handlerhtml(htmlpages)
+    })
       .catch(err => showError(err))
     fetch(config.gridurl, fbody)
       .then(handleErrors)
       .then(response => response.json())
       .then(grids => {this.setState({ grids: grids})
-      this.state.handler(grids)
+      this.state.handlergrids(grids)
     })
       .catch(err => showError(err))
 

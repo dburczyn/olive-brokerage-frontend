@@ -28,7 +28,7 @@ export default function MenuItems (props)
                             return <Fragment key={hit2.created_at}>
 
                                 {
-                               (props.match.params.menuitem  === hit && ("" + hit2.id) === props.match.params.idmenu) ?   (
+                               (props.match.params.menuitem  === hit && ("" + hit2.name) === props.match.params.idmenu) ?   (
                            <MenuItemExt type={hit} srvurl={props.projectwithmenus.projectwithmenus.url} item={hit2} />
                            ) : null
                                 }
