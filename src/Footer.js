@@ -7,6 +7,15 @@ import PropTypes from 'prop-types';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 import config from './config';
+var showdown = require('showdown');
+showdown.setOption('strikethrough', 'true');
+showdown.setOption('simpleLineBreaks', 'true');
+showdown.setOption('simplifiedAutoLink', 'true');
+showdown.setOption('parseImgDimensions', 'true');
+showdown.setOption('tables', 'true');
+showdown.setOption('tasklists', 'true');
+showdown.setOption('ghCodeBlocks', 'true');
+var converter = new showdown.Converter();
 function HideOnScroll (props)
 {
   const { children, window } = props;
@@ -63,30 +72,39 @@ export default function Footer (props)
   return (
     <div className={classes.root}>
       <HideOnScroll {...props}>
-        <AppBar  color="primary" className={classes.appBar}>
+        <AppBar color="primary" className={classes.appBar} style={config.styles.footer}>
           <Toolbar>
             <img
-              style={{ height: 100 }}
-              src={config.footerimg}
+              style={config.styles.footerimgstyle}
+              src={config.styles.footerimgleft}
               alt="background"
             />
-            <Typography variant="h6" className={classes.title}>
+            <Typography style={config.styles.footertextstyle} className={classes.title}>
             </Typography>
-            <Typography variant="h6">{config.footertext}</Typography>
-            <Typography variant="h6" className={classes.title}>
+            <Typography component={'span'} style={config.styles.footertextstyle}>   <div
+              dangerouslySetInnerHTML={{
+                __html: converter.makeHtml(config.styles.footertext1) || ''
+              }}></div></Typography>
+            <Typography style={config.styles.footertextstyle} className={classes.title}>
             </Typography>
-            <Typography variant="h6">{config.footertext}</Typography>
-            <Typography variant="h6" className={classes.title}>
+            <Typography component={'span'} style={config.styles.footertextstyle}>   <div
+              dangerouslySetInnerHTML={{
+                __html: converter.makeHtml(config.styles.footertext2) || ''
+              }}></div></Typography>
+            <Typography style={config.styles.footertextstyle} className={classes.title}>
             </Typography>
-            <Typography variant="h6">{""}</Typography>
-
+            <Typography component={'span'} style={config.styles.footertextstyle}>   <div
+              dangerouslySetInnerHTML={{
+                __html: converter.makeHtml(config.styles.footertext3) || ''
+              }}></div></Typography>
+            <Typography style={config.styles.footertextstyle} className={classes.title}>
+            </Typography>
+            <Typography style={config.styles.footertextstyle}>{""}</Typography>
             <img
-              style={{ height: 70 }}
-              src={config.footerimg}
+              style={config.styles.footerimgstyle}
+              src={config.styles.footerimgright}
               alt="background"
             />
-
-
           </Toolbar>
         </AppBar>
       </HideOnScroll>

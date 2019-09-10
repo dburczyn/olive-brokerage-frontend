@@ -27,7 +27,7 @@ export default class Html extends Component
         super(props);
         this.state = {
             data: (props.htmlpages.htmlpages && props.htmlpages.htmlpages.length > 0 ? props.htmlpages.htmlpages : undefined),
-            id: (typeof props.match.params.id === 'undefined' ? 1 : props.match.params.id)
+            id: (typeof props.match.params.id === 'undefined' ? 'Home' : props.match.params.id)
         };
     }
     render ()
@@ -44,10 +44,11 @@ export default class Html extends Component
                 return data.find(hasname, id, id, id, id);
             };
             const filtereddata = getname(data)
-            if (filtereddata && filtereddata.content){
-            return (
-                <div><HtmlInner data={filtereddata} /></div>
-            )
+            if (filtereddata && filtereddata.content)
+            {
+                return (
+                    <div><HtmlInner data={filtereddata} /></div>
+                )
             }
             return <div>no data</div>
         }

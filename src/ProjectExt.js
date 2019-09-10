@@ -88,7 +88,7 @@ export default function ProjectExt (props)
                 <Fragment key={Math.random()}>
                   {
                     (typeof props.data.description !== 'undefined') ? (<Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={"/" + props.type + "/" + encodeURIComponent(props.url) + "/" + props.ep + "/" + props.id}>
-                      <MenuItem> Home</MenuItem>
+                      <MenuItem style={{whiteSpace: 'normal'}}> Home</MenuItem>
                     </Link>) : null
                   }
                 </Fragment>
@@ -106,7 +106,7 @@ export default function ProjectExt (props)
                               return <Fragment key={hit2.created_at}>
                                 {
                                   <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route}>
-                                    <MenuItem> {
+                                    <MenuItem style={{whiteSpace: 'normal'}}> {
                                       (typeof hit2.name !== 'undefined') ? (hit2.name) : (hit2.id)
                                     }</MenuItem>
                                   </Link>

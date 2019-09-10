@@ -7,21 +7,19 @@ import Training from './Training';
 import Event from './Event';  // import here all future components
 import { handleErrors, showError } from './helpers';
 import Typography from '@material-ui/core/Typography';
-
+import config from './config';
 function hasname (element)
 {
     return typeof element.name !== 'undefined' && element.name === this;
 }
-
 const getname = (grid) =>
 {
-    if ( grid  && typeof grid.grids !== 'undefined' && typeof grid.grids.grids !== 'undefined')
+    if (grid && typeof grid.grids !== 'undefined' && typeof grid.grids.grids !== 'undefined')
     {
         let type = grid.match.params.id;
         return grid.grids.grids.find(hasname, null, null, null, type);
     }
 };
-
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -55,47 +53,48 @@ export default class GenericGrid extends Component
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             };
         }
-        if (this.state.grids && this.state.grids.length>0){
-        this.state.grids.forEach(griditeminarray =>
+        if (this.state.grids && this.state.grids.length > 0)
         {
-            if (typeof griditeminarray !== 'undefined' && typeof griditeminarray.gridurls !== 'undefined' && griditeminarray.gridurls.length > 0 && griditeminarray.name === this.state.id)
+            this.state.grids.forEach(griditeminarray =>
             {
-                griditeminarray.gridurls.forEach(url =>
+                if (typeof griditeminarray !== 'undefined' && typeof griditeminarray.gridurls !== 'undefined' && griditeminarray.gridurls.length > 0 && griditeminarray.name === this.state.id)
                 {
-                    if (url.enable === true || 1)
+                    griditeminarray.gridurls.forEach(url =>
                     {
-                        fetch(url.url + griditeminarray.type + "s", fbody)
-                            .then(handleErrors)
-                            .then(response => response.json())
-                            .then(data =>
-                            {
-                                data.forEach(element =>
+                        if (url.enable === true || 1)
+                        {
+                            fetch(url.url + griditeminarray.type + "s", fbody)
+                                .then(handleErrors)
+                                .then(response => response.json())
+                                .then(data =>
                                 {
-                                    element.url = url.url;
-                                    element.ep = griditeminarray.type;
-                                })
-                                this.setState(
-                                    prevState => ({
-                                        tiles: prevState.tiles.concat(data)
-                                    }
-                                    )
-                                );
-                            }
-                            )
-                            .catch(err => showError(err));
+                                    data.forEach(element =>
+                                    {
+                                        element.url = url.url;
+                                        element.ep = griditeminarray.type;
+                                    })
+                                    this.setState(
+                                        prevState => ({
+                                            tiles: prevState.tiles.concat(data)
+                                        }
+                                        )
+                                    );
+                                }
+                                )
+                                .catch(err => showError(err));
+                        }
                     }
+                    );
                 }
-                );
-            }
-        });
-    }
+            });
+        }
     }
     render ()
     {
         const { id, tiles, Tag } = this.state;
         if (tiles.length > 0)
         {
-            return <div><Typography component={'span'} variant={'h3'}>
+            return <div><Typography component={'span'} style={config.styles.gridtitle} >
                 {id}
             </Typography> <div className={useStyles.root} style={{
                 padding: 50

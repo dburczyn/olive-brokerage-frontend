@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 export default function Project (props)
 {
     const classes = useStyles();
-    const route = "/"+props.type+"/" + encodeURIComponent(props.item.url) + "/" + props.item.ep + "s/" + props.item.id;
+    const route = "/" + props.type + "/" + encodeURIComponent(props.item.url) + "/" + props.item.ep + "s/" + props.item.id;
     return (
         <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route}  >
             <Card className={classes.card}>
@@ -39,7 +39,6 @@ export default function Project (props)
                         <Typography variant="body2" color="textSecondary" component="p">
                             {props.item.description}
                         </Typography>
-
                     </CardContent>
                 </CardActionArea>
                 <CardActions>

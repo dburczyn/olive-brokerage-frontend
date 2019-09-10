@@ -7,10 +7,10 @@ export default class MenuItemExt extends Component
 {
     constructor(props)
     {
-super(props);
+        super(props);
         this.state = {
             data: props,
-            Tag: this.components[((typeof props.type !== 'undefined' && typeof this.components[props.type]!=='undefined') ? props.type : 'generic')],
+            Tag: this.components[((typeof props.type !== 'undefined' && typeof this.components[props.type] !== 'undefined') ? props.type : 'generic')],
         };
     }
     components = {

@@ -31,7 +31,7 @@ HideOnScroll.propTypes = {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    },
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -68,14 +68,19 @@ const MenuAppBarInner = (props) =>
   return (
     <div className={classes.root}>
       <HideOnScroll {...props}>
-  <AppBar className={classes.appbar}>
+        <AppBar className={classes.appbar} style={config.styles.header}>
           <Toolbar>
+            <img
+              style={config.styles.headerimgstyle}
+              src={config.styles.headerimg}
+              alt="background"
+            />
             {
               (props.htmlpages.length > 0) ? (
                 props.htmlpages.map(htmlpage => <Fragment key={htmlpage.created_at}>
-                  {( htmlpage.visible === (true||1)) ?
-                    (<Link color="inherit" className={classes.link} component={RouterLink} to={"/html/" + htmlpage.name}>
-                      <Typography>   {htmlpage.name} </Typography>
+                  {(htmlpage.visible === (true || 1)) ?
+                    (<Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={"/html/" + htmlpage.name}>
+                      <Typography style={config.styles.headerlinkstyle}>   {htmlpage.name} </Typography>
                     </Link>) : null
                   }
                 </Fragment>)
@@ -85,10 +90,10 @@ const MenuAppBarInner = (props) =>
               (props.grids.length > 0) ? (
                 props.grids.map(grid => <Fragment key={grid.created_at}>
                   {
-                    (grid.visible === true||1) ?
-                      (<Link color="inherit" className={classes.link} component={RouterLink} to={{ pathname: "/grid/" + grid.name}}
+                    (grid.visible === true || 1) ?
+                      (<Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={{ pathname: "/grid/" + grid.name }}
                       >
-                        <Typography>{grid.name} </Typography>
+                        <Typography style={config.styles.headerlinkstyle}>{grid.name} </Typography>
                       </Link>) : null
                   }
                 </Fragment>)
@@ -97,8 +102,8 @@ const MenuAppBarInner = (props) =>
             <Typography variant="h6" className={classes.title}>
             </Typography>
             {(localStorage.getItem('token') == null || localStorage.getItem('token') === "null") && (
-              <Link color="inherit" className={classes.link} component={RouterLink} to="/signin">
-                <Typography>Sign In </Typography>
+              <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to="/signin">
+                <Typography style={config.styles.headerlinkstyle}>Sign In </Typography>
               </Link>
             )}
             {localStorage.getItem('token') != null && localStorage.getItem('token') !== "null" && (
@@ -146,8 +151,8 @@ export default class MenuAppBar extends Component
     this.state = {
       htmlpages: [],
       grids: [],
-      handlergrids:props.handlergrids,
-      handlerhtml:props.handlerhtml
+      handlergrids: props.handlergrids,
+      handlerhtml: props.handlerhtml
     };
   }
   componentDidMount ()
@@ -162,18 +167,21 @@ export default class MenuAppBar extends Component
     fetch(config.htmlurl, fbody)
       .then(handleErrors)
       .then(response => response.json())
-      .then(htmlpages => {this.setState({ htmlpages: htmlpages})
-      this.state.handlerhtml(htmlpages)
-    })
+      .then(htmlpages =>
+      {
+        this.setState({ htmlpages: htmlpages })
+        this.state.handlerhtml(htmlpages)
+      })
       .catch(err => showError(err))
     fetch(config.gridurl, fbody)
       .then(handleErrors)
       .then(response => response.json())
-      .then(grids => {this.setState({ grids: grids})
-      this.state.handlergrids(grids)
-    })
+      .then(grids =>
+      {
+        this.setState({ grids: grids })
+        this.state.handlergrids(grids)
+      })
       .catch(err => showError(err))
-
   }
   render ()
   {

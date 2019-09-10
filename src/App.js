@@ -32,10 +32,10 @@ export default class App extends Component
 
   render ()
   {
-    const { grids,htmlpages } = this.state;
+    const { grids, htmlpages } = this.state;
     return (
-      <div>
-        <Header handlergrids={this.handlergrids}  handlerhtml={this.handlerhtml}  />
+      <div >
+        <Header handlergrids={this.handlergrids} handlerhtml={this.handlerhtml} />
         <Main grids={grids} htmlpages={htmlpages} />
         <Footer />
       </div>

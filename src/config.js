@@ -9,7 +9,43 @@ const config = {
     resetpasswordurl: backendurl + '/auth/forgot-password',
     changeredirecturl: frontendurl + '/changepassword',
     resetpasswordurlsubmit: backendurl + '/auth/reset-password',
-    footerimg: "https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    footertext: "This is example footer content"
+    styles: {
+        footerimgleft: "https://digifof.eu/sites/default/files/logo_digifof.png",
+        footerimgright: "https://digifof.eu/sites/default/files/images/erasmus.jpg",
+        headerimg: "https://digifof.eu/sites/default/files/logo_digifof.png",
+        footertext1: '<a href="/">Home</a><br><a href="/">Home</a><br><a href="/">Home</a><br><a href="/">Home</a><br><a href="/">Home</a><br><a href="/">Home</a><br>',
+        footertext2: '<a href="/html/hidden">hidden</a>',
+        footertext3: 'not a link',
+        headerimgstyle: {
+            height: 100,
+            padding: 10
+        },
+        footerimgstyle: {
+            height: 70,
+            padding: 20
+        },
+        gridtitle: {
+            fontSize: 50
+        },
+        header: {
+            background: '#FFE500'
+        },
+        headerlinkstyle: {
+            fontSize: 17,
+            color: '#000000',
+            fontFamily: "\"Roboto Condensed\" , sans-serif",
+            fontWeight: 700,
+            textTransform: 'uppercase'
+        },
+        footer: {
+            background: '#FFE500'
+        },
+        footertextstyle: {
+            fontFamily: "\"Roboto Condensed\" , sans-serif",
+            fontSize: 14,
+            color: 'black',
+            textDecoration: 'none'
+        },
+    }
 };
 export default config;
