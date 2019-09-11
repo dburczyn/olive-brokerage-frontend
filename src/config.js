@@ -1,6 +1,8 @@
 const backendurl = 'http://localhost:1337';
 const frontendurl = 'http://localhost:3000';
+
 const config = {
+    sitekey:'6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
     serverurl: backendurl,
     htmlurl: backendurl + '/htmlpages',
     gridurl: backendurl + '/grids',

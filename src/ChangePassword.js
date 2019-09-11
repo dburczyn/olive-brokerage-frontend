@@ -4,10 +4,11 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import config from './config';
-import {handleErrors, showError} from './helpers';
+import { handleErrors, showError } from './helpers';
+import { useAlert } from 'react-alert';
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -34,14 +35,15 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function ChangePassword() {
+export default function ChangePassword ()
+{
     const classes = useStyles();
-
+    const alert = useAlert();
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon/>
+                    <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Enter New Password
@@ -51,34 +53,37 @@ export default function ChangePassword() {
                     noValidate
                     action="/"
                     method="POST"
-                    onSubmit={(e) => {
-                    e.preventDefault();
-                    let url = new URL(window.location.href);
-                    let code = url
-                        .searchParams
-                        .get("code");
-                    let fbody = {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({'code': code, 'password': e.target.password.value, 'passwordConfirmation': e.target.confirmpassword.value})
-                    }
-                    fetch(config.resetpasswordurlsubmit, fbody)
-                    .then(handleErrors)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.jwt && data.user) {
-                                localStorage.setItem('token', data.jwt);
-                                localStorage.setItem('user', data.user.username);
-                                window.location.href = "/";
-                                alert("Password changed succesfully")
-                            }
-                        })
-                        .catch( err => showError(err))
-                }}>
-
+                    onSubmit={(e) =>
+                    {
+                        e.preventDefault();
+                        let url = new URL(window.location.href);
+                        let code = url
+                            .searchParams
+                            .get("code");
+                        let fbody = {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ 'code': code, 'password': e.target.password.value, 'passwordConfirmation': e.target.confirmpassword.value })
+                        }
+                        fetch(config.resetpasswordurlsubmit, fbody)
+                            .then(handleErrors)
+                            .then(response => response.json())
+                            .then(data =>
+                            {
+                                if (data.jwt && data.user)
+                                {
+                                    localStorage.setItem('token', data.jwt);
+                                    localStorage.setItem('user', data.user.username);
+                                    window.location.href = "/";
+                                    alert("Password changed succesfully")
+                                }
+                            })
+                            .catch(err => showError(err))
+                            .then(resolvederror => alert.show(JSON.stringify(resolvederror)))
+                    }}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -88,8 +93,7 @@ export default function ChangePassword() {
                         label="Password"
                         type="password"
                         id="password"
-                        autoComplete="current-password"/>
-
+                        autoComplete="current-password" />
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -99,8 +103,7 @@ export default function ChangePassword() {
                         label="Confirm Password"
                         type="password"
                         id="confirmpassword"
-                        autoComplete="current-password"/>
-
+                        autoComplete="current-password" />
                     <Button
                         type="submit"
                         fullWidth
@@ -109,7 +112,6 @@ export default function ChangePassword() {
                         className={classes.submit}>
                         Change
                     </Button>
-
                 </form>
             </div>
         </Container>

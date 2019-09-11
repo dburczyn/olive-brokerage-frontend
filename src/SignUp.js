@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -9,8 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import config from './config';
-import {handleErrors, showError} from './helpers';
-
+import { handleErrors, showError } from './helpers';
+import { useAlert } from 'react-alert';
+import { ReCaptcha } from 'react-recaptcha-google'
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
@@ -35,10 +36,10 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
-export default function SignUp() {
+const SignUpInner = (props) =>
+{
   const classes = useStyles();
-
+  const alert = useAlert();
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -48,34 +49,34 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate action="/" method="POST" onSubmit={(e) => {
+        <form className={classes.form} noValidate action="/" method="POST" onSubmit={(e) =>
+        {
           e.preventDefault();
-          let fbody = {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              username: e.target.firstName.value + " " + e.target.lastName.value,
-              email: e.target.email.value,
-              password: e.target.password.value,
-            })
-          }
-          fetch(config.signupurl, fbody)
-          .then(handleErrors)
-          .then(response => response.json())
-          .then(data =>  {
-            if (data.jwt && data.user ) {
-            localStorage.setItem('token', data.jwt);
-            localStorage.setItem('user', data.user.username);
-            window.location.href = "/";
+          if (props.token !== '')
+          {
+            let fbody = {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                username: e.target.firstName.value + " " + e.target.lastName.value,
+                email: e.target.email.value,
+                password: e.target.password.value,
+              })
             }
-          })
-          .catch( err => showError(err))
-
-
-          } }>
+            fetch(config.signupurl, fbody)
+              .then(handleErrors)
+              .then(() =>
+              {
+                window.location.href = "/registered";
+              })
+              .catch(err => showError(err))
+              .then(resolvederror => alert.show(JSON.stringify(resolvederror)))
+          }
+        }
+        }>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -142,7 +143,60 @@ export default function SignUp() {
           </Grid>
         </form>
       </div>
-
     </Container>
   );
+}
+export default class MenuAppBar extends Component
+{
+  constructor(props, context)
+  {
+    super(props, context);
+    this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
+    this.verifyCallback = this.verifyCallback.bind(this);
+    this.state = {
+      token: ''
+    };
+  }
+  componentDidMount ()
+  {
+    if (this.captchaDemo)
+    {
+      this.captchaDemo.reset();
+    }
+  }
+  onLoadRecaptcha ()
+  {
+    if (this.captchaDemo)
+    {
+      this.captchaDemo.reset();
+    }
+  }
+  verifyCallback (recaptchaToken)
+  {
+    this.setState({ token: recaptchaToken })
+  }
+  render ()
+  {
+    const { token } = this.state;
+    return (
+      <div><SignUpInner token={token}
+      />
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}>
+          <ReCaptcha
+            ref={(el) => { this.captchaDemo = el; }}
+            size="normal"
+            data-theme="dark"
+            render="explicit"
+            sitekey={config.sitekey}
+            onloadCallback={this.onLoadRecaptcha}
+            verifyCallback={this.verifyCallback}
+          />
+        </div>
+      </div>
+    )
+  }
 }

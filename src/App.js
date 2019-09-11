@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import { loadReCaptcha } from 'react-recaptcha-google';
 
 export default class App extends Component
 {
-
   constructor(props)
   {
     super(props);
@@ -22,14 +22,15 @@ export default class App extends Component
       grids: grids,
     });
   }
-
   handlerhtml (htmlpages)
   {
     this.setState({
       htmlpages: htmlpages
     });
   }
-
+  componentDidMount() {
+    loadReCaptcha();
+  }
   render ()
   {
     const { grids, htmlpages } = this.state;
@@ -40,9 +41,5 @@ export default class App extends Component
         <Footer />
       </div>
     );
-
-
   }
-
-
 }

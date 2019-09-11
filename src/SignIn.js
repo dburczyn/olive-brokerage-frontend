@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import config from './config';
 import {handleErrors, showError} from './helpers';
-
+import { useAlert } from 'react-alert';
 
 
 const useStyles = makeStyles(theme => ({
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
-
+  const alert = useAlert();
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -67,14 +67,14 @@ export default function SignIn() {
           .then(handleErrors)
           .then(response => response.json())
           .then(data =>  {
-            if (data.jwt && data.user ) {
+            if (data.jwt && data.user) {
             localStorage.setItem('token', data.jwt);
             localStorage.setItem('user', data.user.username);
             window.location.href = "/";
             }
           })
           .catch( err => showError(err))
-
+          .then(resolvederror => alert.show(JSON.stringify(resolvederror)))
           } }>
 
           <TextField

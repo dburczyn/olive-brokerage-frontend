@@ -4,6 +4,8 @@ import HtmlRouter from './HtmlRouter';
 import GenericGrid from './GenericGrid';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import Registered from './Registered';
+import Activated from './Activated';
 import ForgotPassword from './ForgotPassword';
 import ChangePassword from './ChangePassword';
 import GenericExt from './GenericExt';
@@ -18,8 +20,10 @@ const Main = (passedprops) => (
       <Route exact path='/grid/:id' render={(props) => <GenericGrid  {...props} grids={passedprops.grids} key={Math.random()} />} />
       <Route path='/signin' component={SignIn} />
       <Route path='/signup' component={SignUp} />
+      <Route path='/registered' component={Registered} />
       <Route path='/forgotpassword' component={ForgotPassword} />
       <Route path='/changepassword' component={ChangePassword} />
+      <Route path='/activated' component={Activated} />
     </Switch>
   </main>
 )
