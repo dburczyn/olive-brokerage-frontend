@@ -1,4 +1,4 @@
-const backendurl = 'http://localhost:1337';
+const backendurl = 'https://olive-brokerage-cms.herokuapp.com';
 const frontendurl = 'https://olive-brokerage.herokuapp.com';
 
 const config = {
