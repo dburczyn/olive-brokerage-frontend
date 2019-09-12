@@ -75,6 +75,9 @@ const SignUpInner = (props) =>
               .catch(err => showError(err))
               .then(resolvederror => alert.show(JSON.stringify(resolvederror)))
           }
+          else{
+            alert.show("Solve CAPTCHA")
+          }
         }
         }>
           <Grid container spacing={2}>
