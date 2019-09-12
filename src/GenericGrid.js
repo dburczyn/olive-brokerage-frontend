@@ -61,7 +61,10 @@ export default class GenericGrid extends Component
                 {
                     griditeminarray.gridurls.forEach(url =>
                     {
+                        if (url.url.slice(-1)!=="/")
+                        {
                         url.url=url.url + "/";
+                        }
                         if (url.enable === true || 1)
                         {
                             fetch(url.url + griditeminarray.type + "s", fbody)
