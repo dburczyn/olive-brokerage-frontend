@@ -37,7 +37,7 @@ export default function Training (props)
                             {props.item.name}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {"Date: " + props.item.date}
+                        {"Date: " + new Date(props.item.date).toLocaleString()}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             {"Created: " +new Date(props.item.created_at).toLocaleString()}
