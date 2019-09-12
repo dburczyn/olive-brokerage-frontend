@@ -36,7 +36,7 @@ export default function Event (props)
                         <Typography gutterBottom variant="h5" component="h2">
                             {props.item.name}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
+                        <Typography variant="h6" color="textPrimary" component="p">
                             {"Date: " + new Date(props.item.date).toLocaleString()}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">

@@ -14,10 +14,11 @@ function hasname (element)
 }
 const getname = (grid) =>
 {
-    if (grid && typeof grid.grids !== 'undefined' && typeof grid.grids.grids !== 'undefined')
+    if (grid && typeof grid.grids !== 'undefined')
     {
-        let type = grid.match.params.id;
-        return grid.grids.grids.find(hasname, null, null, null, type);
+
+        var type = grid.match.params.id;
+        return grid.grids.find(hasname, type);
     }
 };
 const useStyles = makeStyles(theme => ({

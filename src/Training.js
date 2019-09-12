@@ -36,11 +36,11 @@ export default function Training (props)
                     <Typography gutterBottom variant="h5" component="h2">
                             {props.item.name}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                        {"Date: " + new Date(props.item.date).toLocaleString()}
+                        <Typography variant="h6" color="textPrimary" component="p">
+                        {"Date: " +new Date(props.item.date).toLocaleString()}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {"Created: " +new Date(props.item.created_at).toLocaleString()}
+                            {"Created: " +new Date(props.item.date).toLocaleString()}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             {"Updated: "+new Date(props.item.updated_at).toLocaleString()}

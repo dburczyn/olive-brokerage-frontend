@@ -83,7 +83,7 @@ export default function TrainingExt (props)
               {props.data.name}
             </Typography>
             <Typography component="h5" variant="h6">
-              Date: {props.data.date}
+            Date: {new Date(props.data.date).toLocaleString()}
             </Typography>
           </Grid>
           </Grid>

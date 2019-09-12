@@ -36,7 +36,7 @@ export default function Job (props)
                     <Typography gutterBottom variant="h5" component="h2">
                             {props.item.name}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
+                        <Typography variant="h6" color="textPrimary" component="p">
                             {"Type: " + props.item.type}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
