@@ -66,9 +66,7 @@ export default function ProjectExt (props)
             <CardActionArea>
               <CardMedia
                 className={classes.media}
-                image={config.serverurl + (typeof props.data.picture !== 'undefined'
-                  ? props.data.picture.url
-                  : '')}
+                image={(typeof props.data.picture !== 'undefined' ? config.serverurl + props.data.picture.url : props.data.AlternatePictureUrl)}
                 title="Job Pic" />
             </CardActionArea>
           </Grid>

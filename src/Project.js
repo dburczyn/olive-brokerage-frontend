@@ -29,7 +29,7 @@ export default function Project (props)
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
-                        image={config.serverurl + (typeof props.item.picture !== 'undefined' ? props.item.picture.url : "")}
+                        image={(typeof props.item.picture !== 'undefined' ? config.serverurl + props.item.picture.url : props.item.AlternatePictureUrl)}
                         title="Project Tile"
                     />
                     <CardContent>

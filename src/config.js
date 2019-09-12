@@ -15,7 +15,7 @@ const config = {
         footerimgleft: "https://digifof.eu/sites/default/files/logo_digifof.png",
         footerimgright: "https://digifof.eu/sites/default/files/images/erasmus.jpg",
         headerimg: "https://digifof.eu/sites/default/files/logo_digifof.png",
-        footertext1: '<a href="/">Home</a><br><a href="/">Home</a><br><a href="/">Home</a><br><a href="/">Home</a><br><a href="/">Home</a><br><a href="/">Home</a><br>',
+        footertext1: '<a href="/">Home</a><br><a href="/">Home2</a><br><a href="/">Home3</a><br><a href="/">Home4</a><br><a href="/">Home5</a><br><a href="/">Home6</a><br>',
         footertext2: '<a href="/html/hidden">hidden</a>',
         footertext3: 'not a link',
         headerimgstyle: {
