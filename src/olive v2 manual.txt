@@ -1,0 +1,52 @@
+prerequisites:
+latest version of npm
+latest version of postgresql
+clone repository/extract zip file
+open command prompt/windows powershell/terminal inside project folder
+run:
+npm install
+adjust config for database connection (set user/pass/port/host as env variables) or
+type it in database.json
+note, one of the configurations is the name of the database.
+This should be created beforehand (for example using pgadmin gui, that comes default with postgres installation)
+Obviously, database uset set in config has to have all the rights to the database
+run:
+npm run build
+npm run production
+by default, your application will run on localhost, port 1337 and
+your admin dashboard woud be avilable at:
+http://localhost:1337/admin
+obviously, above is configurable in server.json (host and port)
+now, after accessing admin panel, you can create your administrator account.
+If you would like to use migration package to see example content, now is the time,
+when database is empty - just run provided sql commands on the database you created
+Regardless, set user permissions to view content, that you would like to display
+As a default, you should set permission to 'find' and 'findone' for all public roles
+for all predefined content types.
+adjust you email server setting if you want to recover passwords of your users using
+emailserver other than default
+content creation
+please use unique names for htmlpages and grids - else you will run into unexpected behaviour
+for frontend
+clone repository/extract zip file
+open command prompt/windows powershell/terminal inside project folder
+run:
+npm install
+adjust config in config.js file:
+most importantly backendurl and frontendurl
+you can also adjust styling for selec components such as header or footer
+sometimes you are not limited to styling options provded- it might be possible to add new.
+npm run build
+then host the built app
+npm install -g serve
+serve -s build -l 4000
+In above example, port where your app will be available is 4000 - you con adjust it to your needs
+
+
+
+
+
+parse date event
+parse date training
+text card default on
+account confirm default on
