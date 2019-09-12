@@ -69,8 +69,7 @@ export default function SignIn ()
                             .then(handleErrors)
                             .then(() =>
                             {
-                                window.location.href = "/";
-                                alert("Password reset link sent to email")
+                                window.location.href = "/emailsent";
                             })
                             .catch(err => showError(err))
                             .then(resolvederror => alert.show(JSON.stringify(resolvederror)))

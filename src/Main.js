@@ -6,6 +6,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Registered from './Registered';
 import Activated from './Activated';
+import EmailSent from './EmailSent';
 import ForgotPassword from './ForgotPassword';
 import ChangePassword from './ChangePassword';
 import GenericExt from './GenericExt';
@@ -24,6 +25,7 @@ const Main = (passedprops) => (
       <Route path='/forgotpassword' component={ForgotPassword} />
       <Route path='/changepassword' component={ChangePassword} />
       <Route path='/activated' component={Activated} />
+      <Route path='/emailsent' component={EmailSent} />
     </Switch>
   </main>
 )
