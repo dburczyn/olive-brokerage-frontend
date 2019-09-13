@@ -72,7 +72,14 @@ export default function SignIn ()
                                 window.location.href = "/emailsent";
                             })
                             .catch(err => showError(err))
-                            .then(resolvederror => alert.show(JSON.stringify(resolvederror)))
+                            .then(resolvederror =>
+                                {
+                                  if (typeof resolvederror ==='string')
+                                  alert.show(resolvederror)
+                                  else{
+                                alert.show(JSON.stringify(resolvederror))
+                                  }
+                              })
                     }}>
                     <TextField
                         variant="outlined"

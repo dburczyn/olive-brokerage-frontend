@@ -73,7 +73,14 @@ const SignUpInner = (props) =>
                 window.location.href = "/registered";
               })
               .catch(err => showError(err))
-              .then(resolvederror => alert.show(JSON.stringify(resolvederror)))
+              .then(resolvederror =>
+                {
+                  if (typeof resolvederror ==='string')
+                  alert.show(resolvederror)
+                  else{
+                alert.show(JSON.stringify(resolvederror))
+                  }
+              })
           }
           else{
             alert.show("Solve CAPTCHA")

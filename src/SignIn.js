@@ -74,7 +74,14 @@ export default function SignIn() {
             }
           })
           .catch( err => showError(err))
-          .then(resolvederror => alert.show(JSON.stringify(resolvederror)))
+          .then(resolvederror =>
+            {
+              if (typeof resolvederror ==='string')
+              alert.show(resolvederror)
+              else{
+            alert.show(JSON.stringify(resolvederror))
+              }
+          })
           } }>
 
           <TextField
