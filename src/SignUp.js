@@ -59,6 +59,7 @@ const SignUpInner = (props) =>
               headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Token': props.token
               },
               body: JSON.stringify({
                 username: e.target.firstName.value + " " + e.target.lastName.value,
