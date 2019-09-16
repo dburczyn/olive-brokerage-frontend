@@ -81,7 +81,6 @@ const SignUpInner = (props) =>
                   else{
                 alert.show(JSON.stringify(resolvederror))
                   }
-                  props.verif ('');
               })
           }
           else{
@@ -190,9 +189,8 @@ export default class MenuAppBar extends Component
   render ()
   {
     const { token } = this.state;
-    const { verif } = this.verifyCallback;
     return (
-      <div><SignUpInner token={token} verif={verif}
+      <div><SignUpInner token={token}
       />
         <div style={{
           display: 'flex',
