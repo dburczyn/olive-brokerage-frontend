@@ -1,8 +1,8 @@
-const backendurl = 'https://olive-brokerage-cms.herokuapp.com';
-const frontendurl = 'https://olive-brokerage.herokuapp.com';
+const backendurl = 'https://olive-brokerage-cms.herokuapp.com';     //IMPORTANT
+const frontendurl = 'https://olive-brokerage.herokuapp.com';        //IMPORTANT
 
 const config = {
-    sitekey:'6Le7CrgUAAAAALYfcXV3i8kp3w1si5HRhgoRhqgU',
+    sitekey:'6Le7CrgUAAAAALYfcXV3i8kp3w1si5HRhgoRhqgU',            //IMPORTANT
     serverurl: backendurl,
     htmlurl: backendurl + '/htmlpages',
     gridurl: backendurl + '/grids',

@@ -38,7 +38,7 @@ export default function Changed ()
                 <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-                Activation Successful
+                Password Change Successful
                 </Typography>
             <Typography component="h1" variant="h5">
                 <br />
