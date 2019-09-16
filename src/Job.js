@@ -26,8 +26,8 @@ export default function Job (props)
     const classes = useStyles();
     const route = "/"+props.type+"/" + encodeURIComponent(props.item.url) + "/" + props.item.ep + "s/" + props.item.id;
     return (
-        <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route}  >
             <Card className={classes.card}>
+                        <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route}  >
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
@@ -54,7 +54,7 @@ export default function Job (props)
                         Details
                     </Button>
                 </CardActions>
+                   </Link>
             </Card>
-        </Link>
     );
 }
