@@ -1,8 +1,8 @@
-const backendurl = 'http://localhost:1337';
-const frontendurl = 'http://localhost:3000';
+const backendurl = 'https://olive-brokerage-cms.herokuapp.com';
+const frontendurl = 'https://olive-brokerage.herokuapp.com';
 
 const config = {
-    sitekey:'6LfeP7gUAAAAADqHzA8qdmK0Uu1vT9YRsF_Em8Ro',
+    sitekey:'6Le7CrgUAAAAALYfcXV3i8kp3w1si5HRhgoRhqgU',
     serverurl: backendurl,
     htmlurl: backendurl + '/htmlpages',
     gridurl: backendurl + '/grids',
