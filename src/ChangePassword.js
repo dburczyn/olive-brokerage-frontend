@@ -75,10 +75,7 @@ export default function ChangePassword ()
                             {
                                 if (data.jwt && data.user)
                                 {
-                                    localStorage.setItem('token', data.jwt);
-                                    localStorage.setItem('user', data.user.username);
-                                    window.location.href = "/";
-                                    alert("Password changed succesfully")
+                                    window.location.href = "/changed";
                                 }
                             })
                             .catch(err => showError(err))
