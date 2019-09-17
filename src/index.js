@@ -9,7 +9,7 @@ import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
 const THEME = createMuiTheme({
   typography: {
-    "fontFamily": "\"Helvetica Neue\", \"Arial\", sans-serif",
+    "fontFamily": "\"Roboto Condensed\", \"Arial\", sans-serif",
     "fontSize": 14,
     "fontWeightLight": 300,
     "fontWeightRegular": 400,

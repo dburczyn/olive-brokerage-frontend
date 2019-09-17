@@ -1,8 +1,9 @@
 const backendurl = 'https://olive-brokerage-cms.herokuapp.com';     //IMPORTANT
 const frontendurl = 'https://olive-brokerage.herokuapp.com';        //IMPORTANT
+const sitekey = '6Le7CrgUAAAAALYfcXV3i8kp3w1si5HRhgoRhqgU';        //IMPORTANT
 
 const config = {
-    sitekey:'6Le7CrgUAAAAALYfcXV3i8kp3w1si5HRhgoRhqgU',            //IMPORTANT
+    sitekey:sitekey,
     serverurl: backendurl,
     htmlurl: backendurl + '/htmlpages',
     gridurl: backendurl + '/grids',
@@ -15,19 +16,20 @@ const config = {
         footerimgleft: "https://digifof.eu/sites/default/files/logo_digifof.png",
         footerimgright: "https://digifof.eu/sites/default/files/images/erasmus.jpg",
         headerimg: "https://digifof.eu/sites/default/files/logo_digifof.png",
-        footertext1: '<a href="/">Home</a><br><a href="/">Home2</a><br><a href="/">Home3</a><br><a href="/">Home4</a><br><a href="/">Home5</a><br><a href="/">Home6</a><br>',
-        footertext2: '<a href="/html/hidden">hidden</a>',
-        footertext3: 'not a link',
+        footertext1: '<a href="https://digifof.eu/contact">Contact</a>',
+        footertext2: '<a href="https://digifof.eu/legal-mentions">Legal mentions</a>',
+        footertext3: '',
         headerimgstyle: {
             height: 100,
-            padding: 10
+            padding: 0
         },
         footerimgstyle: {
             height: 70,
             padding: 20
         },
         gridtitle: {
-            fontSize: 50
+            fontSize: 50,
+            textTransform: 'uppercase'
         },
         header: {
             background: '#FFE500'
@@ -46,7 +48,6 @@ const config = {
             fontFamily: "\"Roboto Condensed\" , sans-serif",
             fontSize: 14,
             color: 'black',
-            textDecoration: 'none'
         },
     }
 };

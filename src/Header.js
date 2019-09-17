@@ -43,6 +43,9 @@ const useStyles = makeStyles(theme => ({
   },
   appbar: {
     overflowX: "auto",
+    },
+  toolbar: {
+    paddingLeft: "0px"
   },
 }));
 const MenuAppBarInner = (props) =>
@@ -69,7 +72,7 @@ const MenuAppBarInner = (props) =>
     <div className={classes.root}>
       <HideOnScroll {...props}>
         <AppBar className={classes.appbar} style={config.styles.header}>
-          <Toolbar>
+          <Toolbar className={classes.toolbar}>
             <img
               style={config.styles.headerimgstyle}
               src={config.styles.headerimg}
@@ -90,7 +93,7 @@ const MenuAppBarInner = (props) =>
               (props.grids.length > 0) ? (
                 props.grids.map(grid => <Fragment key={grid.created_at}>
                   {
-                    (grid.visible === true || 1) ?
+                    (grid.visible === (true || 1)) ?
                       (<Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={{ pathname: "/grid/" + grid.name }}
                       >
                         <Typography style={config.styles.headerlinkstyle}>{grid.name} </Typography>
