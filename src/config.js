@@ -1,6 +1,6 @@
-const backendurl = 'https://olive-brokerage-cms.herokuapp.com';     //IMPORTANT
-const frontendurl = 'https://olive-brokerage.herokuapp.com';        //IMPORTANT
-const sitekey = '6Le7CrgUAAAAALYfcXV3i8kp3w1si5HRhgoRhqgU';        //IMPORTANT
+const backendurl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:1337';
+const frontendurl = process.env.REACT_APP_FRONTEND_URL || 'http://localhost:8080';
+const sitekey = process.env.REACT_APP_SITE_KEY || '6LfeP7gUAAAAADqHzA8qdmK0Uu1vT9YRsF_Em8Ro';
 
 const config = {
     sitekey:sitekey,
