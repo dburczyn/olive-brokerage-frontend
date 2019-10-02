@@ -10,8 +10,9 @@ export default class GenericExt extends Component
     {
         super(props);
         this.state = {
+            grids: props.grids,
             hits: [],
-            url: decodeURIComponent(props.match.params.url),
+            url: props.match.params.url,
             ep: props.match.params.ep,
             id: props.match.params.id,
             Tag: this.components[((typeof props.match.params.ep !== 'undefined' && typeof this.components[props.match.params.ep] !== 'undefined') ? props.match.params.ep : 'Projects')],
@@ -35,11 +36,26 @@ export default class GenericExt extends Component
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             };
         }
-        fetch(this.state.url + this.state.ep + "/" + this.state.id, fbody)
-            .then(handleErrors)
-            .then(response => response.json())
-            .then(data => this.setState({ hits: data }))
-            .catch(err => showError(err))
+        if (this.state.grids.length > 0)
+        {
+            this.state.grids.forEach(griditeminarray =>
+            {
+                if (typeof griditeminarray.gridurls !== 'undefined' && typeof griditeminarray.name !== 'undefined' && griditeminarray.name === this.state.ep && griditeminarray.gridurls.length > 0)
+                {
+                    griditeminarray.gridurls.forEach(griditeminarrayurl =>
+                    {
+                        if (typeof griditeminarrayurl.name !== 'undefined' && griditeminarrayurl.name === this.state.url)
+                        {
+                            fetch(griditeminarrayurl.url + this.state.ep + "/" + this.state.id, fbody)
+                                .then(handleErrors)
+                                .then(response => response.json())
+                                .then(data => this.setState({ hits: data }))
+                                .catch(err => showError(err))
+                        }
+                    });
+                }
+            });
+        }
     }
     render ()
     {

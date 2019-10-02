@@ -75,7 +75,7 @@ export default class GenericGrid extends Component
                                 {
                                     data.forEach(element =>
                                     {
-                                        element.url = url.url;
+                                        element.url = url.name;
                                         element.ep = griditeminarray.type;
                                     })
                                     this.setState(

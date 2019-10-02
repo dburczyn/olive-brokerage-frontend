@@ -1,4 +1,4 @@
-const backendurl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:1337';
+const backendurl = process.env.REACT_APP_BACKEND_URL || 'https://digifof.boc-group.eu';
 const frontendurl = process.env.REACT_APP_FRONTEND_URL || 'http://localhost:5000';
 const sitekey = process.env.REACT_APP_SITE_KEY || '6LfeP7gUAAAAADqHzA8qdmK0Uu1vT9YRsF_Em8Ro';
 
