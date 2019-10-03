@@ -1,5 +1,5 @@
 FROM mhart/alpine-node:11 AS builder
-WORKDIR /olive-brokerage-frontend
+WORKDIR /digifof-brokerage-frontend
 COPY . .
 RUN npm install
 RUN npm install -g serve
