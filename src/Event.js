@@ -34,10 +34,10 @@ export default function Event (props)
                         title="Event Tile"
                     />
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
+                        <Typography gutterBottom variant="h4" component="h2">
                             {props.item.name}
                         </Typography>
-                        <Typography variant="h6" color="textPrimary" component="p">
+                        <Typography variant="h5" color="textPrimary" component="p">
                             {"Date: " + new Date(props.item.date).toUTCString()}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
