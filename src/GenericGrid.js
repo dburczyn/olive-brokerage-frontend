@@ -80,10 +80,11 @@ export default class GenericGrid extends Component
                                     })
                                     this.setState(
                                         prevState => ({
-                                            tiles: prevState.tiles.concat(data)
+                                            tiles: prevState.tiles.concat(data).sort((a, b) => parseFloat(Date.parse(b.updated_at)) - parseFloat(Date.parse(a.updated_at)))
                                         }
                                         )
                                     );
+                                    console.log(this.state.tiles)
                                 }
                                 )
                                 .catch(err => showError(err));
