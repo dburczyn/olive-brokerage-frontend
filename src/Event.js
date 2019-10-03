@@ -13,7 +13,6 @@ import config from './config';
 const useStyles = makeStyles({
     card: {
         maxWidth: 345,
-        maxHeight: 300,
         minWidth: 300,
         minHeight: 300,
     },
@@ -39,13 +38,13 @@ export default function Event (props)
                             {props.item.name}
                         </Typography>
                         <Typography variant="h6" color="textPrimary" component="p">
-                            {"Date: " + new Date(props.item.date).toLocaleString()}
+                            {"Date: " + new Date(props.item.date).toUTCString()}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {"Created: " +new Date(props.item.created_at).toLocaleString()}
+                            {"Created: " +new Date(props.item.created_at).toUTCString()}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {"Updated: "+new Date(props.item.updated_at).toLocaleString()}
+                            {"Updated: "+new Date(props.item.updated_at).toUTCString()}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

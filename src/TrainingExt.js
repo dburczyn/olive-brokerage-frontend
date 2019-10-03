@@ -83,7 +83,7 @@ export default function TrainingExt (props)
               {props.data.name}
             </Typography>
             <Typography component="h5" variant="h6">
-            Date: {new Date(props.data.date).toLocaleString()}
+            Date: {new Date(props.data.date).toUTCString()}
             </Typography>
           </Grid>
           </Grid>
@@ -100,10 +100,10 @@ export default function TrainingExt (props)
           <Grid container spacing={3}>
         <Grid item xs={12}>
         <Typography component="h5" variant="h6">
-        Last update: {new Date(props.data.updated_at).toLocaleString()}
+        Last update: {new Date(props.data.updated_at).toUTCString()}
             </Typography>
             <Typography component="h5" variant="h6">
-              Created: {new Date(props.data.created_at).toLocaleString()}
+              Created: {new Date(props.data.created_at).toUTCString()}
             </Typography>
           </Grid>
           </Grid>

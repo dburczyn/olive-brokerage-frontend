@@ -13,7 +13,6 @@ import config from './config';
 const useStyles = makeStyles({
     card: {
         maxWidth: 345,
-        maxHeight: 300,
         minWidth: 300,
         minHeight: 300,
     },
