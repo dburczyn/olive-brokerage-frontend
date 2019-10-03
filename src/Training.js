@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 export default function Training (props)
 {
     const classes = useStyles();
-    const route = "/"+props.type+"/" + encodeURIComponent(props.item.url) + "/" + props.item.ep + "s/" + props.item.id;
+    const route = "/"+props.type+"/" + props.item.url + "/" + props.item.ep + "s/" + props.item.id;
     return (
             <Card className={classes.card}>
                         <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route}  >
