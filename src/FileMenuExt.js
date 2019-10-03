@@ -19,7 +19,8 @@ export default function FileMenuExt (props)
                 }}></div>
             {props.data.item.files.map((file) =>
             {
-                return (<div key={Math.random()}> <a href={file.url}  target="_blank" rel="noopener noreferrer" download>{file.name}</a><br /></div>)
+                console.log(props)
+                return (<div key={Math.random()}> <a href={props.data.srvurl +file.url}  target="_blank" rel="noopener noreferrer" download>{file.name}</a><br /></div>)
             })}
         </Typography>
     );

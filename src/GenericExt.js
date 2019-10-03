@@ -13,6 +13,7 @@ export default class GenericExt extends Component
             grids: props.grids,
             hits: [],
             url: props.match.params.url,
+            parsedurl:'',
             ep: props.match.params.ep,
             id: props.match.params.id,
             Tag: this.components[((typeof props.match.params.ep !== 'undefined' && typeof this.components[props.match.params.ep] !== 'undefined') ? props.match.params.ep : 'Projects')],
@@ -49,7 +50,7 @@ export default class GenericExt extends Component
                             fetch(griditeminarrayurl.url + this.state.ep + "/" + this.state.id, fbody)
                                 .then(handleErrors)
                                 .then(response => response.json())
-                                .then(data => this.setState({ hits: data }))
+                                .then(data => this.setState({ hits: data, parsedurl:griditeminarrayurl.url }))
                                 .catch(err => showError(err))
                         }
                     });
@@ -59,9 +60,9 @@ export default class GenericExt extends Component
     }
     render ()
     {
-        const { hits, Tag, menuitem, idmenu, url, ep, id, type } = this.state;
+        const { hits, Tag, menuitem, idmenu, url, ep, id, type,parsedurl } = this.state;
         return (
-            <div><Tag data={hits} menuitem={menuitem} idmenu={idmenu} url={url} ep={ep} type={type} id={id} /></div>
+            <div><Tag data={hits} menuitem={menuitem} idmenu={idmenu} url={url} parsedurl={parsedurl} ep={ep} type={type} id={id} /></div>
         )
     }
 }

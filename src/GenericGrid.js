@@ -84,7 +84,6 @@ export default class GenericGrid extends Component
                                         }
                                         )
                                     );
-                                    console.log(this.state.tiles)
                                 }
                                 )
                                 .catch(err => showError(err));
