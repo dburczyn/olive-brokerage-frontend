@@ -47,7 +47,7 @@ export default class GenericExt extends Component
                     {
                         if (typeof griditeminarrayurl.name !== 'undefined' && griditeminarrayurl.name === this.state.url)
                         {
-                            fetch(griditeminarrayurl.url + this.state.ep + "/" + this.state.id, fbody)
+                            fetch(griditeminarrayurl.url.replace(/\/$/, "") +"/" + this.state.ep + "/" + this.state.id, fbody)
                                 .then(handleErrors)
                                 .then(response => response.json())
                                 .then(data => this.setState({ hits: data, parsedurl:griditeminarrayurl.url }))
