@@ -1,4 +1,4 @@
-const backendurl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:1337';
+const backendurl = process.env.REACT_APP_BACKEND_URL || 'https://digifof.boc-group.eu/';
 const frontendurl = process.env.REACT_APP_FRONTEND_URL || 'http://localhost:5000';
 const sitekey = process.env.REACT_APP_SITE_KEY || '6LfeP7gUAAAAADqHzA8qdmK0Uu1vT9YRsF_Em8Ro';
 const config = {
@@ -12,9 +12,9 @@ const config = {
     changeredirecturl: frontendurl + '/changepassword',
     resetpasswordurlsubmit: backendurl + '/auth/reset-password',
     styles: {
-        footerimgleft: "http://localhost:1337/uploads/cc02796cf0c44c719c8febf5fc985825.jpg",
+        footerimgleft: "https://digifof.boc-group.eu/uploads/1904ff043b614a0989c893d0bc48187e.jpg",
         footerimgright: "",
-        headerimg: "http://localhost:1337/uploads/cd9d246156484967a1cae51657e6a821.png",
+        headerimg: "https://digifof.boc-group.eu/uploads/0cc6d8ac4f454eb585fc4f88dc0c11d1.png",
         headertext: 'Open Models Laboratory',
         footertext1: '<b>Open Models Laboratory</b> \n Währinger Straße 29 \n  1090 Vienna',
         footertext2: '<b>Coordinator</b> \n The OMiLAB Community',
