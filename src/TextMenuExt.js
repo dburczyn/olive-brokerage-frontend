@@ -1,5 +1,8 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
 var showdown = require('showdown');
 showdown.setOption('strikethrough', 'true');
 showdown.setOption('simpleLineBreaks', 'true');
@@ -12,11 +15,15 @@ var converter = new showdown.Converter();
 export default function TextMenuExt (props)
 {
     return (
-        <Typography component={'span'} variant={'body2'}>
-            <div
-                dangerouslySetInnerHTML={{
-                    __html: converter.makeHtml(props.data.item.content)
-                }}></div>
-        </Typography>
+        <Card>
+            <CardContent>
+                <Typography component={'span'} variant={'body2'}>
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: converter.makeHtml(props.data.item.content)
+                        }}></div>
+                </Typography>
+            </CardContent>
+        </Card>
     );
 }

@@ -13,7 +13,7 @@ import ChangePassword from './ChangePassword';
 import GenericExt from './GenericExt';
 import config from './config';
 const Main = (passedprops) => (
-  <main style={{ margin: (config.styles.headerimgstyle) ? (config.styles.headerimgstyle.height + 40) : 100 }}>
+  <main style={{ margin: (config.styles.header) ? (config.styles.header.height + 40) : 150 }}>
     <Switch>
       <Route exact path='/' render={(props) => <HtmlRouter  {...props} htmlpages={passedprops.htmlpages} key={Math.random()} />} />
       <Route path='/html' render={(props) => <HtmlRouter  {...props} htmlpages={passedprops.htmlpages} key={Math.random()} />} />

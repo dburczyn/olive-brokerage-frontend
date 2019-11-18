@@ -99,12 +99,6 @@ export default function Footer (props)
               }}></div></Typography>
             <Typography style={config.styles.footertextstyle} className={classes.title}>
             </Typography>
-            <Typography style={config.styles.footertextstyle}>{""}</Typography>
-            <img
-              style={config.styles.footerimgstyle}
-              src={config.styles.footerimgright}
-              alt="background"
-            />
           </Toolbar>
         </AppBar>
       </HideOnScroll>

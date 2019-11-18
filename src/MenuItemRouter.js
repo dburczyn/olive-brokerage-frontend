@@ -4,7 +4,7 @@ import MenuItems from './MenuItems';
 const MenuItemRouter = (projectwithmenus) =>
 {
   return (
-    <div style={{ margin: 100 }}>
+    <div>
       <Switch>
         <Route exact path='/grid/:url/:ep/:id' render={(props) => <MenuItems {...props} projectwithmenus={projectwithmenus} key={Math.random()} />} />
         <Route exact path='/grid/:url/:ep/:id/:menuitem/:idmenu' render={(props) => <MenuItems {...props} projectwithmenus={projectwithmenus} key={Math.random()} />} />

@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import Typography from '@material-ui/core/Typography';
 import MenuItemExt from './MenuItemExt';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 export default function MenuItems (props)
 {
   if (typeof props.projectwithmenus.projectwithmenus !== 'undefined')
@@ -10,8 +12,11 @@ export default function MenuItems (props)
         {
           (typeof props.projectwithmenus.projectwithmenus.data !== 'undefined' && typeof props.match.params.menuitem === 'undefined') ? (
             <Fragment key={Math.random()}>
-              <Typography>{props.projectwithmenus.projectwithmenus.data.description}</Typography>
-            </Fragment>)
+              <Card>
+                <CardContent style={{ marginTop: '14px', marginBottom: '14px' }}>
+                  <Typography component={'span'} variant={'body2'}>{props.projectwithmenus.projectwithmenus.data.description}</Typography>
+                </CardContent>
+              </Card>            </Fragment>)
             : null
         }
         {

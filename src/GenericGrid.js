@@ -2,9 +2,6 @@ import React, { Fragment, Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Project from './Project';
-import Job from './Job';
-import Training from './Training';
-import Event from './Event';  // import here all future components
 import { handleErrors, showError } from './helpers';
 import Typography from '@material-ui/core/Typography';
 import config from './config';
@@ -31,9 +28,6 @@ export default class GenericGrid extends Component
 {
     components = {
         Project: Project,
-        Job: Job,
-        Training: Training,
-        Event: Event
     };
     constructor(props)
     {

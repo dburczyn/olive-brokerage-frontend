@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link as RouterLink } from 'react-router-dom';
@@ -14,6 +14,15 @@ import config from './config';
 import PropTypes from 'prop-types';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
+var showdown = require('showdown');
+showdown.setOption('strikethrough', 'true');
+showdown.setOption('simpleLineBreaks', 'true');
+showdown.setOption('simplifiedAutoLink', 'true');
+showdown.setOption('parseImgDimensions', 'true');
+showdown.setOption('tables', 'true');
+showdown.setOption('tasklists', 'true');
+showdown.setOption('ghCodeBlocks', 'true');
+var converter = new showdown.Converter();
 function HideOnScroll (props)
 {
   const { children, window } = props;
@@ -33,19 +42,21 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    display: 'flex'
   },
   title: {
     flexGrow: 1,
   },
   link: {
-    padding: 10,
+    padding: '10px'
+  },
+  plink: {
+    flex: '1',
+    padding: '10px',
+    paddingRight: '20px'
   },
   appbar: {
     overflowX: "auto",
-    },
-  toolbar: {
-    paddingLeft: "0px"
   },
 }));
 const MenuAppBarInner = (props) =>
@@ -72,12 +83,14 @@ const MenuAppBarInner = (props) =>
     <div className={classes.root}>
       <HideOnScroll {...props}>
         <AppBar className={classes.appbar} style={config.styles.header}>
-          <Toolbar className={classes.toolbar}>
-            <img
-              style={config.styles.headerimgstyle}
-              src={config.styles.headerimg}
-              alt="background"
-            />
+          <Toolbar style={config.styles.toolbarup}>
+            <img style={config.styles.headerimgstyle} src={config.styles.headerimg} alt="background" />
+            <Typography component={'span'} style={config.styles.headertextstyle}>   <div
+              dangerouslySetInnerHTML={{
+                __html: converter.makeHtml(config.styles.headertext) || ''
+              }}></div></Typography>
+          </Toolbar>
+          <Toolbar style={config.styles.toolbardown}>
             {
               (props.htmlpages.length > 0) ? (
                 props.htmlpages.map(htmlpage => <Fragment key={htmlpage.created_at}>
@@ -105,11 +118,6 @@ const MenuAppBarInner = (props) =>
             <Typography variant="h6" className={classes.title}>
             </Typography>
             {(localStorage.getItem('token') == null || localStorage.getItem('token') === "null") && (
-              <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to="/signin">
-                <Typography style={config.styles.headerlinkstyle}>Sign In </Typography>
-              </Link>
-            )}
-            {localStorage.getItem('token') != null && localStorage.getItem('token') !== "null" && (
               <div>
                 <IconButton
                   aria-label="account of current user"
@@ -118,7 +126,8 @@ const MenuAppBarInner = (props) =>
                   onClick={handleMenu}
                   color="inherit"
                 >
-                  <AccountCircle />
+                  <Typography style={config.styles.headerlinkstyle}>Not logged in<ArrowDropDown fontSize='small' />
+                  </Typography>
                 </IconButton>
                 <Menu
                   id="menu-appbar"
@@ -135,7 +144,45 @@ const MenuAppBarInner = (props) =>
                   open={open}
                   onClose={handleClose}
                 >
-                  <MenuItem >{localStorage.getItem('user')}</MenuItem>
+                  <MenuItem className={classes.menuButton} onClick={handleClose} >      <Link underline="none" color="inherit" className={classes.plink} component={RouterLink} to="/signin">
+                    <Typography style={config.styles.headerpopupstyle}>Log In </Typography>
+                  </Link></MenuItem>
+                  <MenuItem className={classes.menuButton} onClick={handleClose}><Link underline="none" color="inherit" className={classes.plink} component={RouterLink} to="/signup">
+                    <Typography style={config.styles.headerpopupstyle}>Register</Typography>
+                  </Link></MenuItem>
+                  <MenuItem className={classes.menuButton} onClick={handleClose}><Link underline="none" color="inherit" className={classes.plink} component={RouterLink} to="/forgotpassword">
+                    <Typography style={config.styles.headerpopupstyle}>Forgot Password</Typography>
+                  </Link></MenuItem>
+                </Menu>
+              </div>
+            )}
+            {localStorage.getItem('token') != null && localStorage.getItem('token') !== "null" && (
+              <div>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <Typography style={config.styles.headerlinkstyle}>{localStorage.getItem('user')}<ArrowDropDown fontSize='small' />
+                  </Typography>
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
               </div>

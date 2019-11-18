@@ -3,16 +3,13 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import config from './config';
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Back from './Back';
 import MenuItemRouter from './MenuItemRouter';
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -81,12 +78,11 @@ export default function ProjectExt (props)
         </Grid>
         <Grid container spacing={3}>
           <Grid item xs={2}>
-            <Paper className={classes.paper}>
               <MenuList>
                 <Fragment key={Math.random()}>
                   {
                     (typeof props.data.description !== 'undefined') ? (<Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={"/" + props.type + "/" + props.url + "/" + props.ep + "/" + props.id}>
-                      <MenuItem style={{whiteSpace: 'normal'}}> Home</MenuItem>
+                      <MenuItem style={{whiteSpace: 'normal', background:'#EFF9FF', border: '1px solid #DDDDDD', color: '#337AB7', fontWeight: 'bold'}}> Home</MenuItem>
                     </Link>) : null
                   }
                 </Fragment>
@@ -104,7 +100,7 @@ export default function ProjectExt (props)
                               return <Fragment key={hit2.created_at}>
                                 {
                                   <Link underline="none" color="inherit" className={classes.link} component={RouterLink} to={route}>
-                                    <MenuItem style={{whiteSpace: 'normal'}}> {
+                                    <MenuItem style={{whiteSpace: 'normal', background:'#EFF9FF', border: '1px solid #DDDDDD', color: '#337AB7'}}> {
                                       (typeof hit2.name !== 'undefined') ? (hit2.name) : (hit2.id)
                                     }</MenuItem>
                                   </Link>
@@ -121,16 +117,12 @@ export default function ProjectExt (props)
                     : null
                 }
               </MenuList>
-            </Paper>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={10} style={{marginTop:'20px', paddingTop:'0px'}}>
             <MenuItemRouter key={Math.random()} projectwithmenus={props} />
           </Grid>
         </Grid>
       </div>
-      <Box mt={5}>
-        <Back />
-      </Box>
     </Container>
   );
 }
