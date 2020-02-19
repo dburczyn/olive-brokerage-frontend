@@ -11,11 +11,13 @@ import EmailSent from './EmailSent';
 import ForgotPassword from './ForgotPassword';
 import ChangePassword from './ChangePassword';
 import GenericExt from './GenericExt';
+import ToolboxLayout from './MsControler';
 import config from './config';
 const Main = (passedprops) => (
   <main style={{ margin: (config.styles.header) ? (config.styles.header.height + 40) : 150 }}>
     <Switch>
-      <Route exact path='/' render={(props) => <HtmlRouter  {...props} htmlpages={passedprops.htmlpages} key={Math.random()} />} />
+      {/* <Route exact path='/' render={(props) => <HtmlRouter  {...props} htmlpages={passedprops.htmlpages} key={Math.random()} />} /> */}
+      <Route exact path='/' component={ToolboxLayout} />
       <Route path='/html' render={(props) => <HtmlRouter  {...props} htmlpages={passedprops.htmlpages} key={Math.random()} />} />
       <Route exact path='/grid/:url/:ep/:id' render={(props) => <GenericExt {...props} grids={passedprops.grids} key={Math.random()} />} />
       <Route exact path='/grid/:url/:ep/:id/:menuitem/:idmenu' render={(props) => <GenericExt {...props} grids={passedprops.grids} key={Math.random()}/>} />
